@@ -1,0 +1,307 @@
+/* GLOBAIS */
+.viewport {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 30%;
+    /* border: 3px solid purple; */
+}
+
+p {
+    font-size: 20px;
+    color: #000000;
+}
+
+h4 {
+    font-size: 25px;
+    color: #00c982;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: #00c982;
+}
+
+
+
+/* Header */
+header {
+    display: flex;
+    height: 14vh;
+    width: 100%;
+    background-color: #030303;
+    justify-content: center;
+    position: fixed;
+    z-index: 3;
+    border-bottom: 2px solid #00b475;
+}
+
+header .container {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .container .navbar {
+    height: 55%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbar_logo {
+    width: 15%;
+}
+
+.navbar_itens {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar_itens li {
+    list-style: none;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.navbar_itens li a {
+    font-size: 12.5px;
+    text-decoration: none;
+    color: #dfdfdf;
+}
+
+/* Animação dos Botons de Header */
+.navbar_itens li a:hover {
+    font-size: 13.5px;
+    transition: 0.5s;
+    color: #d6d6d6;
+}
+
+.navbar_log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.navbar_log a {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    padding: 10px;
+    background-color: #00e494;
+    text-decoration: none;
+    color: black;
+    border-radius: 20px;
+}
+
+/* Animação do Botão ABRA SUA CONTA do Header */
+.navbar_log a:hover {
+    width: 230px;
+    transition: 0.5s;
+    background-color: #00c781;
+}
+
+/* Fim do Header */
+
+/* Banner */
+.banner {
+    height: 110vh;
+    background-image: url(banner1.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 4px solid #00c982;
+}
+
+.banner_container {
+    height: 50%;
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.banner_logo {
+    width: 45%;
+}
+
+.banner_slogan {
+    font-size: 30px;
+    color: #d6d6d6;
+}
+
+.banner_button {
+    background-color: #00e494;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.banner_button:hover {
+    width: 130px;
+    transition: 0.5s;
+    background-color: #00c781;
+}
+
+.banner_button a {
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+}
+
+/* Missão Visão e Valores */
+.div_sobrenos {
+    /* tirar depois que decidirmos a fonte que usaremos no site inteiro!!! */
+    padding: 50px 0;
+    background-color: whitesmoke;
+    color: #00c982;
+    /* border: 3px solid pink; */
+}
+
+.div_sobrenos .container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 95%;
+    margin: auto;
+    /* border: 3px solid palegreen; */
+}
+
+.box img {
+    height: 128px;
+    align-self: center;
+
+}
+
+/* Integrantes */
+
+.div_integrantes {
+    padding: 20px;
+    background-color: #00c982;
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+    /* border: 3px solid pink; */
+}
+
+.div_integrantes .container {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 95%;
+    margin: auto;
+    /* border: 3px solid palegreen; */
+}
+
+.div_integrantes p {
+    color: aliceblue;
+}
+
+.div_integrantes_name {
+    color: aliceblue;
+    margin: 7px;
+}
+
+.div_integrantes_title {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}
+
+.div_integrantes .container img {
+    align-self: center;
+    border: 5px solid aliceblue;
+    border-radius: 100px;
+}
+
+/* Fale Conosco */
+
+.faleconosco {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 70vh;
+    background-color: whitesmoke;
+    color: #00c982;
+}
+
+.faleconosco .container {
+    width: 60%;
+    display: flex;
+    height: 20%;
+    justify-content: center;
+
+}
+
+.faleconosco_input {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faleconosco_input input {
+    margin-top: 10px;
+    border: 1px solid #00b475;
+    border-radius: 7px;
+}
+
+.faleconosco_text {
+    height: 30%;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.faleconosco_text input {
+    border: 1px solid #00b475;
+    border-radius: 7px;
+}
+
+.texto_faleconosco {
+    width: 200px;
+    height: 200px;
+}
+
+/* Rodapé */
+.footer {
+    height: 17vh;
+    background-color: #030303;
+    border-top: 2px solid #00b475;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+}
+
+.footer_container {
+    width: 20%;
+    height: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footer_social {
+    width: 25px;
+}
