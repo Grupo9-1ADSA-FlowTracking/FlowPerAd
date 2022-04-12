@@ -2,6 +2,7 @@
 .viewport {
     margin: 0;
     font-family: sans-serif;
+    background-color: whitesmoke;
 }
 
 .box {
@@ -15,11 +16,14 @@
 p {
     font-size: 20px;
     color: #000000;
+    text-align: justify;
 }
 
 h4 {
     font-size: 25px;
     color: #00c982;
+    display: flex;
+    justify-content: center;
 }
 
 h2 {
@@ -29,9 +33,14 @@ h2 {
     color: #00c982;
 }
 
+/* Menu NotIndex */
+.menu_notindex {
+    display: flex;
+    justify-content: center;
+}
 
 
-/* Header */
+/* Header Index */
 header {
     display: flex;
     height: 14vh;
@@ -83,9 +92,8 @@ header .container .navbar {
 
 /* Animação dos Botons de Header */
 .navbar_itens li a:hover {
-    font-size: 13.5px;
     transition: 0.5s;
-    color: #d6d6d6;
+    color: #00e494;
 }
 
 .navbar_log {
@@ -166,21 +174,54 @@ header .container .navbar {
     font-size: 13px;
 }
 
+/* O Que Somos ? */
+
+.div_sobrenos .container {
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div_sobrenos_logo {
+    width: 60%;
+}
+
+.div_sobrenos .container h4 {
+    margin-top: 90px;
+}
+
+
 /* Missão Visão e Valores */
 .div_sobrenos {
     /* tirar depois que decidirmos a fonte que usaremos no site inteiro!!! */
-    padding: 50px 0;
-    background-color: whitesmoke;
-    color: #00c982;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
     /* border: 3px solid pink; */
 }
 
-.div_sobrenos .container {
+.div_sobrenos .container2 {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
-    width: 95%;
+    width: 90%;
     margin: auto;
     /* border: 3px solid palegreen; */
+}
+
+.div_sobrenos_perfis {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.div_sobrenos .container2 {
+    display: flex;
+    justify-content: center;
 }
 
 .box img {
@@ -189,14 +230,20 @@ header .container .navbar {
 
 }
 
+.div_sobrenos_perfis .box p {
+    padding: 20px;
+}
+
 /* Integrantes */
 
 .div_integrantes {
-    padding: 20px;
+    padding-top: 60px;
     background-color: #00c982;
     display: flex;
     flex-direction: column;
-    height: 55vh;
+    height: 70vh;
+    border-top: 4px solid #009e67;
+    border-bottom: 4px solid #009e67;
     /* border: 3px solid pink; */
 }
 
@@ -211,6 +258,8 @@ header .container .navbar {
 
 .div_integrantes p {
     color: aliceblue;
+    display: flex;
+    justify-content: center;
 }
 
 .div_integrantes_name {
@@ -231,6 +280,42 @@ header .container .navbar {
     border-radius: 100px;
 }
 
+/* Flow Per Ad */
+.div_produto {
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+
+}
+
+.div_produto .container h4 {
+    margin-bottom: 0;
+}
+
+.div_produto .container {
+    width: 80%;
+    height: 110vh;
+}
+
+.div_produto_conteudo {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.div_produto_conteudo img {
+    width: 25%;
+}
+
+.div_produto_conteudo p {
+    padding: 30px;
+}
+
+
+
 /* Fale Conosco */
 
 .faleconosco {
@@ -239,8 +324,9 @@ header .container .navbar {
     flex-direction: column;
     width: 100%;
     height: 70vh;
-    background-color: whitesmoke;
     color: #00c982;
+    background-color: white;
+    border-top: 2px solid #00c982;
 }
 
 .faleconosco .container {
@@ -275,33 +361,237 @@ header .container .navbar {
 .faleconosco_text input {
     border: 1px solid #00b475;
     border-radius: 7px;
+    text-align: center;
 }
 
 .texto_faleconosco {
     width: 200px;
-    height: 200px;
+    height: 30%;
 }
 
 /* Rodapé */
 .footer {
-    height: 17vh;
+    height: 20vh;
     background-color: #030303;
     border-top: 2px solid #00b475;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     align-items: center;
     color: white;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .footer_container {
-    width: 20%;
-    height: 60%;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.footer_container2 {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+.footer_container2 h4 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    margin-top: 0;
 }
 
 .footer_social {
-    width: 25px;
+    width: 30px;
+    height: 30px;
+}
+
+.footer_redes_imagens {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.footer_logo .logo {
+    width: 200px;
+    margin: 30px;
+}
+
+/* Login */
+
+.div_login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_login .container {
+    margin-top: 5%;
+    width: 80%;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.div_login .container .log_msg {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 40%;
+    height: 100%;
+    background-color: #73cfaf;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.div_login .container .log_msg p {
+    color: white;
+    text-align: justify;
+    font-size: 15px;
+}
+
+.div_login .container .log_form {
+    height: 100%;
+    width: 60%;
+    background-color: white;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.div_login .container .log_msg .log_msg_bp1 {
+    width: 80%;
+    height: 20%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div_login .container .log_msg .log_msg_bp2 {
+    width: 80%;
+    height: 18%;
+    justify-content: center;
+    display: flex;
+    align-items: flex-end;
+}
+
+.div_login .log_msg_button {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    height: 20px;
+    width: 120px;
+    border-radius: 10px;
+
+}
+
+.div_login .log_msg span {
+    text-decoration: none;
+    color: white;
+}
+
+.div_login .log_msg a {
+    text-decoration: none;
+}
+
+.div_login .log_msg_button_index {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.div_login .log_msg a span:hover {
+    background-color: white;
+    color: #000000;
+    transition: 0.5s;
+}
+
+.log_form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #00c982;
+    font-weight: bolder;
+    padding: 20px;
+}
+
+.div_form.inp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 70%;
+}
+
+.form_inputs {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.form_inputs input {
+    border: 2px solid #00c982;
+    border-radius: 5px;
+}
+
+.form_inputs select {
+    border: 2px solid #00c982;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.log_form_buttons {
+    display: flex;
+    height: 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.log_form_buttons .log_entrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #00c982;
+    width: 100px;
+    border-radius: 15px;
+    height: 25px;
+}
+
+.log_form_buttons .log_entrar:hover {
+    transition: 0.5s;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #00c982;
+    border-radius: 15px;
+}
+
+.log_form_buttons a {
+    text-decoration: none;
+    margin-top: 30px;
+}
+
+.form_logo {
+    width: 100px;
+    margin-top: 30px;
+}
+
+.log_form_buttons .log_ems {
+    color: #00c982;
 }
