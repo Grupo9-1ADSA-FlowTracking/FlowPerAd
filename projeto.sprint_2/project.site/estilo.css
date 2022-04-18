@@ -33,6 +33,10 @@ h2 {
   color: #00c982;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 /* Menu NotIndex */
 .menu_notindex {
   display: flex;
@@ -65,9 +69,10 @@ header .container .navbar {
   justify-content: space-evenly;
 }
 
-.navbar_logo {
-  width: 15%;
+.navbar_logo img{
+  width: 250px;
 }
+
 
 .navbar_itens {
   width: 50%;
@@ -159,12 +164,15 @@ header .container .navbar {
   justify-content: center;
   padding: 20px;
   border-radius: 30px;
+  text-decoration: none;
 }
+
 
 .banner_button:hover {
   width: 130px;
   transition: 0.5s;
   background-color: #00c982;
+  cursor: pointer;
 }
 
 .banner_button a {
