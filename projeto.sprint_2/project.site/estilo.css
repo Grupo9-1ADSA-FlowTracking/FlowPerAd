@@ -14,13 +14,13 @@
 }
 
 p {
-  font-size: 20px;
+  font-size: 18px;
   color: #000000;
   text-align: justify;
 }
 
 h4 {
-  font-size: 25px;
+  font-size: 40px;
   color: #00c982;
   display: flex;
   justify-content: center;
@@ -185,14 +185,14 @@ header .container .navbar {
 
 .div_sobrenos .container {
   width: 80%;
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 .div_sobrenos_logo {
-  width: 60%;
+  width: 400px;
+  padding-bottom: 10px;
 }
 
 .div_sobrenos .container h4 {
@@ -202,7 +202,7 @@ header .container .navbar {
 /* Missão Visão e Valores */
 .div_sobrenos {
   /* tirar depois que decidirmos a fonte que usaremos no site inteiro!!! */
-  padding: 60px;
+  padding: 25px 0 60px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -236,7 +236,20 @@ header .container .navbar {
 }
 
 .div_sobrenos_perfis .box p {
-  padding: 20px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.div_sobrenos_perfis .box h4{
+  font-size: 32px;
+}
+
+.div_sobrenos_perfis .visao ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* Integrantes */
