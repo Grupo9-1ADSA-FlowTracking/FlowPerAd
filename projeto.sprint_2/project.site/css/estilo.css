@@ -52,6 +52,7 @@ header {
   justify-content: center;
   position: fixed;
   z-index: 3;
+  align-items: center;
   border-bottom: 2px solid #00c982;
 }
 
@@ -67,10 +68,11 @@ header .container .navbar {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .navbar_logo img{
-  width: 250px;
+  width: 200px;
 }
 
 
@@ -131,7 +133,7 @@ header .container .navbar {
 /* Banner */
 .banner {
   height: 110vh;
-  background-image: url(banner1.jpg);
+  background-image: url(../imagens/all/banner1.jpg);
   background-size: cover;
   display: flex;
   justify-content: center;
