@@ -46,7 +46,7 @@ html{
 /* Header Index */
 header {
   display: flex;
-  height: 14vh;
+  height: 100px;
   width: 100%;
   background-color: #030303;
   justify-content: center;
@@ -132,7 +132,7 @@ header .container .navbar {
 
 /* Banner */
 .banner {
-  height: 110vh;
+  height: 750px;
   background-image: url(../imagens/all/banner1.jpg);
   background-size: cover;
   display: flex;
@@ -164,9 +164,9 @@ header .container .navbar {
   width: 100px;
   display: flex;
   justify-content: center;
-  padding: 20px;
   border-radius: 30px;
   text-decoration: none;
+  padding: 20px;
 }
 
 
@@ -180,7 +180,7 @@ header .container .navbar {
 .banner_button a {
   text-decoration: none;
   color: black;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 /* O Que Somos ? */
@@ -247,10 +247,9 @@ header .container .navbar {
 }
 
 .div_sobrenos_perfis .visao ul{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
+  text-align: left;
+  padding: 0;
 
 }
 
@@ -261,7 +260,7 @@ header .container .navbar {
   background-color: #00c982;
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 500px;
   border-top: 4px solid #009e67;
   border-bottom: 4px solid #009e67;
   /* border: 3px solid pink; */
@@ -313,7 +312,7 @@ header .container .navbar {
 
 .div_produto .container {
   width: 80%;
-  height: 110vh;
+  height: 700px;
 }
 
 .div_produto_conteudo {
@@ -333,6 +332,34 @@ header .container .navbar {
   padding: 30px;
 }
 
+.div_simulacao{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 220px;
+  
+}
+
+.div_simulacao .button_simulacao{
+  background-color: #00e494;
+  color: #000000;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.div_simulacao .button_simulacao:hover {
+  width: 130px;
+  transition: 0.5s;
+  background-color: #00c982;
+  cursor: pointer;
+}
+
 /* Fale Conosco */
 
 .faleconosco {
@@ -340,10 +367,11 @@ header .container .navbar {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 70vh;
+  height: 550px;
   color: #00c982;
   background-color: #e4fff6;
   border-top: 2px solid #00c982;
+  padding-top: 60px;
 }
 
 .faleconosco .container {
@@ -364,6 +392,9 @@ header .container .navbar {
   margin-top: 10px;
   border: 1px solid #00c982;
   border-radius: 7px;
+  text-align: center;
+  width: 180px;
+  padding: 5px 0;
 }
 
 .faleconosco_text {
@@ -417,7 +448,7 @@ header .container .navbar {
 
 /* Rodapé */
 .footer {
-  height: 20vh;
+  height: 150px;
   background-color: #030303;
   border-top: 2px solid #00b475;
   display: flex;
@@ -469,7 +500,7 @@ header .container .navbar {
 /* Login */
 
 .div_login {
-  height: 100vh;
+  height: 750px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -478,7 +509,7 @@ header .container .navbar {
 .div_login .container {
   margin-top: 5%;
   width: 80%;
-  height: 70vh;
+  height: 500px;
   display: flex;
   flex-direction: row;
 }
@@ -591,6 +622,9 @@ header .container .navbar {
 .form_inputs input {
   border: 2px solid #00c982;
   border-radius: 5px;
+  width: 200px;
+  text-align: center;
+  margin: 3px;
 }
 
 .form_inputs select {
@@ -652,7 +686,7 @@ header .container .navbar {
 /* Dashboard */
 .info_menu {
   display: flex;
-  height: 100vh;
+  height: 750px;
   width: 20%;
   background-color: #030303;
   border-right: 2px solid #00c982;
