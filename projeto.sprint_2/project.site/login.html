@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="icon" href="logo2.png" />
+
+<head>
+    <link rel="icon" href="imagens/logos/logo2.png" />
     <link rel="stylesheet" href="css\estilo.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowTracking - Login</title>
-  </head>
+</head>
 
-  <body class="viewport">
+<body class="viewport">
     <header class="menu_notindex">
-      <div class="container">
-        <div class="navbar">
-          <a href="index.html" class="navbar_logo"><img src="imagens/logos/logo3.png" /></a>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="navbar_logo"><img src="imagens/logos/logo3.png" /></a>
+            </div>
         </div>
-      </div>
     </header>
     <div class="div_login">
-      <div class="container">
-        <div class="log_msg">
-          <h1>Olá!</h1>
-          <p>
-            Faça seu Login para ter acesso<br />
-            ao nosso Painel de Análise
-          </p>
-          <div class="log_msg_bp1">
-            <p>Não tem uma conta?</p>
-            <a href="">
-              <span class="log_msg_button"> Cadastre-se </span>
-            </a>
-          </div>
-          <div class="log_msg_bp2">
-            <a href="index.html">
-              <span class="log_msg_button_index"> Voltar ao Home </span>
-            </a>
-          </div>
-        </div>
-        <div class="log_form">
-          <h4>Faça Seu Login</h4>
-          <div class="log_form_inp">
-            <span class="form_inputs">
+        <div class="container">
+            <div class="log_msg">
+                <h1>Olá!</h1>
+                <p>
+                    Faça seu Login para ter acesso<br /> ao nosso Painel de Análise
+                </p>
+                <div class="log_msg_bp1">
+                    <p>Não tem uma conta?</p>
+                    <a href="cadastro.html">
+                        <span class="log_msg_button"> Cadastre-se </span>
+                    </a>
+                </div>
+                <div class="log_msg_bp2">
+                    <a href="index.html">
+                        <span class="log_msg_button_index"> Voltar ao Home </span>
+                    </a>
+                </div>
+            </div>
+            <div class="log_form">
+                <h4>Faça Seu Login</h4>
+                <div class="log_form_inp">
+                    <span class="form_inputs">
               E-mail:
               <input
                 id="input_email"
@@ -48,49 +48,50 @@
                 placeholder="Ex: brandao@sptech.school"
               />
             </span>
-            <br />
-            <span class="form_inputs">
+                    <br />
+                    <span class="form_inputs">
               Senha:
               <input id="input_senha" type="password" />
             </span>
-          </div>
-          <div id="erro_mensagem"></div>
-          <div class="log_form_buttons">
-            <button onclick="erro()">Entrar</button>
-            <a href="">
-              <span class="log_ems"> Esqueci Minha Senha </span>
-            </a>
-          </div>
-          <img class="form_logo" src="imagens/logos/logo1.png" />
+                </div>
+                <div id="erro_mensagem"></div>
+                <div class="log_form_buttons">
+                    <button onclick="erro()">Entrar</button>
+                    <a href="">
+                        <span class="log_ems"> Esqueci Minha Senha </span>
+                    </a>
+                </div>
+                <img class="form_logo" src="imagens/logos/logo1.png" />
+            </div>
         </div>
-      </div>
     </div>
     <footer class="footer">
-      <div class="footer_logo">
-        <img class="logo" src="imagens/logos/logo3.png" />
-      </div>
-      <div class="footer_container">Todos os<br />Deireitos Reservados ©</div>
-      <div class="footer_container2">
-        <h4>Redes Sociais</h4>
-        <div class="footer_redes_imagens">
-          <img class="footer_social" src="imagens/all/face.png" />
-          <img class="footer_social" src="imagens/all/insta.png" />
-          <img class="footer_social" src="imagens/all/whats.png" />
+        <div class="footer_logo">
+            <img class="logo" src="imagens/logos/logo3.png" />
         </div>
-      </div>
+        <div class="footer_container">Todos os<br />Direitos Reservados ©</div>
+        <div class="footer_container2">
+            <h4>Redes Sociais</h4>
+            <div class="footer_redes_imagens">
+                <img class="footer_social" src="imagens/all/face.png" />
+                <img class="footer_social" src="imagens/all/insta.png" />
+                <img class="footer_social" src="imagens/all/whats.png" />
+            </div>
+        </div>
     </footer>
-  </body>
+</body>
+
 </html>
 
 <script>
-  function erro() {
-    if (
-      input_email.value == "brandao@sptech.school" &&
-      input_senha.value == "brandao1234"
-    ) {
-      window.location.href = "index.html";
-    } else {
-      erro_mensagem.innerHTML = "Email ou senha incorretos";
+    function erro() {
+        if (
+            input_email.value == "brandao@sptech.school" &&
+            input_senha.value == "brandao1234"
+        ) {
+            window.location.href = "index.html";
+        } else {
+            erro_mensagem.innerHTML = "Email ou senha incorretos";
+        }
     }
-  }
 </script>
