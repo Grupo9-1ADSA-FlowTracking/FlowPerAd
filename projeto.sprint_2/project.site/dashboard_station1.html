@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css\estilo.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowTracking - Dashboard</title>
+  </head>
+
+  <body class="dashboard_viewport">
+    <div class="dashboard_menu">
+      <span class="dashboard_logo_box">
+        <img class="dashboard_logo" src="imagens/logos/logo3.png" />
+      </span>
+      <div class="dashboard_div_login">
+        <img class="dashboard_menu_img" src="imagens/all/perfil.png" />
+        <h6>Fernando Brandão</h6>
+        <a href="login.html">
+          <img class="logout_img" src="imagens/all/logout.png" />
+        </a>
+      </div>
+    </div>
+    <div class="sub_menu">
+      <a class="sub_menu_station" href="dashboard_station1.html"> Tatuapé </a>
+      <a class="sub_menu_station" href="dashboard_station2.html"> Paraíso </a>
+      <a class="sub_menu_station_news" href="dashboard_news.html"> Notícias </a>
+    </div>
+    <div class="flow_box">
+      <div class="flow_container">
+        <img src="imagens/all/jcdecaux.png" class="logo_flow_box" />
+        <h3>Tatuapé</h3>
+        <p>Últimos 17 Minutos</p>
+        <div class="graphs_box">
+          <div class="div_graph">
+            <canvas id="myChart2"></canvas>
+          </div>
+        </div>
+        <p>Fluxo Anual</p>
+        <div class="graphs_box">
+          <div class="div_graph">
+            <canvas id="myChart3"></canvas>
+          </div>
+          <div class="div_graph">
+            <canvas id="myChart4"></canvas>
+          </div>
+        </div>
+        <p>Maior Relevância Semanal</p>
+        <div class="graphs_box_rel">
+          <div class="div_graph">
+            <canvas id="myChart5"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer_logo">
+        <img class="logo" src="imagens/logos/logo3.png" />
+      </div>
+      <div class="footer_container">Todos os<br />Direitos Reservados ©</div>
+      <div class="footer_container2">
+        <h4>Redes Sociais</h4>
+        <div class="footer_redes_imagens">
+          <img class="footer_social" src="imagens/all/face.png" />
+          <img class="footer_social" src="imagens/all/insta.png" />
+          <img class="footer_social" src="imagens/all/whats.png" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Gráfico 1
+
+    const labels1 = [
+      "06h40-06h43",
+      "06h43-06h46",
+      "06h46-06h49",
+      "06h49-06h51",
+      "06h51-06h54",
+      "06h54-06h57",
+    ];
+
+    const data1 = {
+      labels: labels1,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#00FC62",
+          borderColor: "#00FC62",
+          data: [0, 1, 2, 3, 3, 3],
+        },
+        {
+          label: "Catraca Sul",
+          backgroundColor: "#696506",
+          borderColor: "#696506",
+          data: [0, 1, 2, 2, 2, 2],
+        },
+        {
+          label: "Catraca Leste",
+          backgroundColor: "#009C00",
+          borderColor: "#009C00",
+          data: [1, 2, 3, 4, 5, 5],
+        },
+        {
+          label: "Catraca Oeste",
+          backgroundColor: "#000000",
+          borderColor: "#000000",
+          data: [1, 2, 2, 4, 5, 6],
+        },
+      ],
+    };
+
+    const config1 = {
+      type: "line",
+      data: data1,
+      options: {},
+    };
+
+    // Gráfico 2
+
+    const labels2 = [
+      "06h40-06h43",
+      "06h43-06h46",
+      "06h46-06h49",
+      "06h49-06h51",
+      "06h51-06h54",
+      "06h54-06h57",
+    ];
+
+    const data2 = {
+      labels: labels2,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#00FC62",
+          borderColor: "#00FC62",
+          data: [0, 1, 2, 3, 3, 3],
+        },
+        {
+          label: "Catraca Sul",
+          backgroundColor: "#696506",
+          borderColor: "#696506",
+          data: [0, 1, 2, 2, 2, 2],
+        },
+        {
+          label: "Catraca Leste",
+          backgroundColor: "#009C00",
+          borderColor: "#009C00",
+          data: [1, 2, 3, 4, 5, 5],
+        },
+        {
+          label: "Catraca Oeste",
+          backgroundColor: "#000000",
+          borderColor: "#000000",
+          data: [1, 2, 2, 4, 5, 6],
+        },
+      ],
+    };
+
+    // Gráfico 3
+
+    const config2 = {
+      type: "bar",
+      data: data2,
+      options: {},
+    };
+
+    const labels3 = [
+      "Maio - 2021",
+      "Junho - 2021",
+      "Julho - 2021",
+      "Agosto - 2021",
+      "Setembro - 2021",
+      "Outubro - 2021",
+      "Novembro - 2021",
+      "Dezembro - 2021",
+      "Janeiro - 2022",
+      "Fevereiro - 2022",
+      "Março - 2022",
+      "Abril - 2022",
+    ];
+
+    const data3 = {
+      labels: labels3,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#00FC62",
+          borderColor: "#00FC62",
+          data: [
+            687560, 345736, 456657, 846643, 756743, 657953, 786363, 657633,
+            786365, 876335, 957837, 869738,
+          ],
+        },
+        {
+          label: "Catraca Sul",
+          backgroundColor: "#696506",
+          borderColor: "#696506",
+          data: [
+            547560, 455736, 566657, 956643, 876743, 845953, 856363, 757633,
+            865365, 634335, 757837, 769738,
+          ],
+        },
+        {
+          label: "Catraca Leste",
+          backgroundColor: "#009C00",
+          borderColor: "#009C00",
+          data: [
+            457560, 545736, 656657, 866643, 972743, 758953, 986363, 657633,
+            1015365, 719335, 834837, 719738,
+          ],
+        },
+        {
+          label: "Catraca Oeste",
+          backgroundColor: "#000000",
+          borderColor: "#000000",
+          data: [
+            564560, 546736, 736657, 847643, 756743, 745953, 657363, 856633,
+            994865, 824335, 785837, 694738,
+          ],
+        },
+      ],
+    };
+
+    const config3 = {
+      type: "line",
+      data: data3,
+      options: {},
+    };
+
+    // Gráfico 4
+
+    const labels4 = ["Maio(2021) - Abril(2022)"];
+
+    const data4 = {
+      labels: labels4,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#00FC62",
+          borderColor: "#00FC62",
+          data: [8685563],
+          tension: 0.4,
+        },
+        {
+          label: "Catraca Sul",
+          backgroundColor: "#696506",
+          borderColor: "#696506",
+          data: [8890563],
+          tension: 0.4,
+        },
+        {
+          label: "Catraca Leste",
+          backgroundColor: "#009C00",
+          borderColor: "#009C00",
+          data: [9191563],
+          tension: 0.4,
+        },
+        {
+          label: "Catraca Oeste",
+          backgroundColor: "#000000",
+          borderColor: "#000000",
+          data: [9012063],
+          tension: 0.4,
+        },
+      ],
+    };
+
+    const config4 = {
+      type: "bar",
+      data: data4,
+      options: {},
+    };
+
+    // Gráfico 5
+
+    const data = {
+      labels: [
+        "Catraca Norte",
+        "Catraca Sul",
+        "Catraca Leste",
+        "Catraca Oeste",
+      ],
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: [3, 2, 5, 6],
+          backgroundColor: ["#00FC62", "#696506", "#009C00", "#000000"],
+          hoverOffset: 4,
+        },
+      ],
+    };
+    const config = {
+      type: "doughnut",
+      data: data,
+    };
+  </script>
+
+  <script>
+    const myChart1 = new Chart(document.getElementById("myChart1"), config1);
+
+    const myChart2 = new Chart(document.getElementById("myChart2"), config2);
+
+    const myChart3 = new Chart(document.getElementById("myChart3"), config3);
+
+    const myChart4 = new Chart(document.getElementById("myChart4"), config4);
+
+    const myChart5 = new Chart(document.getElementById("myChart5"), config);
+  </script>
+</html>
