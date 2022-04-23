@@ -43,9 +43,7 @@
         <img class="banner_logo" src="imagens\logos\logo3.png" />
         <p class="banner_slogan">Na Estação<br />do <b>Sucesso</b>!</p>
       </div>
-      <div class="banner_button">
-        <a href="#simulator"><b>Saiba Mais</b></a>
-      </div>
+      <a class="banner_button" href="#fpa"> Saiba Mais </a>
     </div>
 
     <!-- Corpo -->
@@ -114,25 +112,25 @@
       <div class="container">
         <!-- MATHEUS -->
         <div class="box">
-          <img src="imagens/all/perfil.png" />
+          <img src="imagens/all/math.png" />
           <h4 class="div_integrantes_name">Matheus</h4>
           <p>Back-End Developer (DEV)</p>
         </div>
         <!-- VINICIUS -->
         <div class="box">
-          <img src="imagens/all/perfil.png" />
+          <img src="imagens/all/vini.png" />
           <h4 class="div_integrantes_name">Vinicius</h4>
           <p>Front-End Developer (DEV)</p>
         </div>
         <!-- MIGUEL -->
         <div class="box">
-          <img src="imagens/all/perfil.png" />
+          <img src="imagens/all/miguel.png" />
           <h4 class="div_integrantes_name">Miguel</h4>
           <p>DataBase Administrator (DBA)</p>
         </div>
         <!-- ALISSON -->
         <div class="box">
-          <img src="imagens/all/perfil.png" />
+          <img src="imagens/all/aly.png" />
           <h4 class="div_integrantes_name">Alysson</h4>
           <p>Business Analyst (BA)</p>
         </div>
@@ -173,11 +171,11 @@
         <div class="div_simulação_container_text">
           <h4>Está interessado?<br />Faça uma simulação</h4>
           <p>
-            Faça uma simulação sem compromisso<br />
-            para ver o quanto a sua empresa pode obter<br />
-            vantagem no mercado
+            Faça uma simulação para saber<br />
+            como o nosso produto pode te ajudar!<br />
           </p>
         </div>
+        <img class="simulator_img" src="imagens/all/business_icon.png" />
         <a href="simulador" class="button_simulacao">Simule aqui</a>
       </div>
     </div>
@@ -189,15 +187,27 @@
       <div class="container">
         <div class="faleconosco_input">
           <b>Nome:</b>
-          <input class="contatoEMAIL" placeholder="Ex: Fernando Brandão" />
+          <input
+            id="input_nome_fc"
+            class="contatoEMAIL"
+            placeholder="Ex: Fernando Brandão"
+          />
         </div>
         <div class="faleconosco_input">
           <b>E-mail:</b>
-          <input class="contatoEMAIL" placeholder="Ex: brandao@sptech.school" />
+          <input
+            id="input_email_fc"
+            class="contatoEMAIL"
+            placeholder="Ex: brandao@sptech.school"
+          />
         </div>
         <div class="faleconosco_input">
           <b>Telefone:</b>
-          <input class="contatoEMAIL" placeholder="Ex: 11994857465" />
+          <input
+            id="input_tel_fc"
+            class="contatoEMAIL"
+            placeholder="Ex: 11994857465"
+          />
         </div>
         <br />
       </div>
@@ -205,6 +215,7 @@
         <b>Escreva sua mensagem:</b>
         <br />
         <input
+          id="input_mensagem_fc"
           class="texto_faleconosco"
           placeholder="Sua mensagem"
           type="text"
@@ -237,6 +248,17 @@
 
 <script>
   function enviar_mensagem() {
-    hub.innerHTML = "Mensagem Enviada!";
+    if(input_nome_fc.value == "" || input_email_fc.value == "" || input_tel_fc.value == "") {
+    hub.innerHTML = "Preencha todos os campos !"
+    hub.style.color = "red"
+    }
+    else if (input_mensagem_fc.value == "") {
+      hub.innerHTML = "Preencha o campo de mensagem"
+      hub.style.color = "red"
+    }
+    else {
+      hub.innerHTML = "Mensagem enviada!"
+      hub.style.color = "green"
+    }
   }
 </script>
