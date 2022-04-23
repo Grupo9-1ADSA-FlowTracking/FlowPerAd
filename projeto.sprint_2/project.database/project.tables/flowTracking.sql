@@ -1,70 +1,71 @@
 CREATE DATABASE FlowTracking;
 USE FlowTracking;
 
-CREATE TABLE Empresas (
-    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE cadEmpresa(
+    idEmpresa CHAR(5) PRIMARY KEY,
     nomeEmpresa VARCHAR(70),
     responsavel VARCHAR(70),
     CNPJ CHAR(18)
 );
 
-CREATE TABLE Cadastro (
-    idCadastro INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE cadFunc (
+    idcadFunc INT AUTO_INCREMENT,
     nome VARCHAR(70),
     email VARCHAR(100),
     senha VARCHAR(50),
-    fkEmpresa INT,
-    FOREIGN KEY (fkEmpresa) REFERENCES Empresas (idEmpresa)
+    fkToken CHAR(5),
+    PRIMARY KEY (idcadFunc, fkToken),
+    FOREIGN KEY (fkToken) REFERENCES cadEmpresa (idEmpresa)
 );
 
 CREATE TABLE Estacao(
     idEstacao INT PRIMARY KEY AUTO_INCREMENT,
     nomeEstacao VARCHAR(70),
     linha VARCHAR(70),
-    fkEmpresa INT,
-    FOREIGN KEY (fkEmpresa) REFERENCES Empresas(idEmpresa)
+    fkEmpresa CHAR(5),
+    FOREIGN KEY (fkEmpresa) REFERENCES cadEmpresa(idEmpresa)
 );
 
-CREATE TABLE Sensores(
-    idSensores INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Sensor(
+    idSensor INT PRIMARY KEY AUTO_INCREMENT,
     localizacao VARCHAR(70),
     fkEstacao INT,
     FOREIGN KEY (fkEstacao) REFERENCES Estacao (idEstacao)
 );
 
-CREATE TABLE Registros(
-    idRegistros INT AUTO_INCREMENT,
-    dataRegistros DATETIME,
+CREATE TABLE Registro(
+    idRegistro INT AUTO_INCREMENT,
+    dataRegistro DATETIME,
     registro CHAR(1),
-    fkSensores INT,
-    PRIMARY KEY (idRegistros, fkSensores),
-    FOREIGN KEY (fkSensores) REFERENCES Sensores (idSensores)
+    fkSensor INT,
+    PRIMARY KEY (idRegistro, fkSensor),
+    FOREIGN KEY (fkSensor) REFERENCES Sensor (idSensor)
 );
 
-INSERT INTO Empresas VALUES 
-(NULL, 'JCDecaux', 'Brandão', '96.922.653/0001-05'),
-(NULL, 'Eletromídia', 'Junior', '95.108.718/0001-02'),
-(NULL, 'Mídia Metrô', 'Fernanda', '00.552.480/0001-01');
+INSERT INTO cadEmpresa VALUES 
+('02201', 'JCDecaux', 'Brandão', '96.922.653/0001-05'),
+('02202', 'Eletromídia', 'Junior', '95.108.718/0001-02'),
+('02203', 'Mídia Metrô', 'Fernanda', '00.552.480/0001-01');
 
-INSERT INTO Cadastro VALUES
-(NULL, 'Vicente', 'vicente@flow.com', 'vicentex15', 1),
-(NULL, 'Cláudio', 'claudio@flow.com', 'cclaudio57', 1),
-(NULL, 'Evelyn', 'evelyn@flow.com', 'eve1617lyn', 1),
-(NULL, 'Luiza', 'luiza@flow.com', 'lui2020za1', 2),
-(NULL, 'Eduarda', 'eduarda@flow.com', '#eduarda1213', 2),
-(NULL, 'Betina', 'betina@flow.com', 'betina123', 2),
-(NULL, 'Matheus', 'matheus@flow.com', 'matheus456X#', 3),
-(NULL, 'Levi', 'levi@flow.com', 'levi2526KL14', 3),
-(NULL, 'Felipe', 'felipe@flow.com', 'felipe2526xd', 3);
+INSERT INTO cadFunc VALUES
+(NULL, 'Vicente', 'vicente@flow.com', 'vicentex15', '02201'),
+(NULL, 'Cláudio', 'claudio@flow.com', 'cclaudio57', '02201'),
+(NULL, 'Evelyn', 'evelyn@flow.com', 'eve1617lyn', '02201'),
+(NULL, 'Luiza', 'luiza@flow.com', 'lui2020za1', '02202'),
+(NULL, 'Eduarda', 'eduarda@flow.com', '#eduarda1213', '02202'),
+(NULL, 'Betina', 'betina@flow.com', 'betina123', '02202'),
+(NULL, 'Matheus', 'matheus@flow.com', 'matheus456X#', '02203'),
+(NULL, 'Levi', 'levi@flow.com', 'levi2526KL14', '02203'),
+(NULL, 'Felipe', 'felipe@flow.com', 'felipe2526xd', '02203');
 
 INSERT INTO Estacao VALUES
-(NULL, 'Tatuapé', '3', 1),
-(NULL, 'Paraíso', '2', 1),
-(NULL, 'Santa Marina', '6', 2),
-(NULL, 'Luz', '4', 2),
-(NULL, 'Vila Prudente', '15', 3);
+(NULL, 'Tatuapé', '3', '02201'),
+(NULL, 'Paraíso', '2', '02201'),
+(NULL, 'Santa Marina', '6', '02202'),
+(NULL, 'Luz', '4', '02202'),
+(NULL, 'Vila Prudente', '15', '02203');
 
-INSERT INTO Sensores VALUES
+INSERT INTO Sensor VALUES
 (NULL, 'Catraca-Leste', 1), -- Tatuapé 1
 (NULL, 'Catraca-Norte', 1), -- 2
 (NULL, 'Catraca-Sul', 1), -- 3
@@ -86,7 +87,7 @@ INSERT INTO Sensores VALUES
 (NULL, 'Catraca-Sul', 5), -- 19
 (NULL, 'Catraca-Oeste', 5); -- 20
 
-INSERT INTO Registros VALUES
+INSERT INTO Registro VALUES
 -- Tatuapé
 (NULL, '2022-04-12 06:40', 1, 1),
 (NULL, '2022-04-12 06:41', 1, 1),
@@ -195,48 +196,48 @@ INSERT INTO Registros VALUES
 (NULL, '2022-03-29 16:36', 1, 20);
 
 
-SELECT * FROM Empresas;
-SELECT * FROM Cadastro;
+SELECT * FROM cadEmpresa;
+SELECT * FROM cadFunc;
 SELECT * FROM Estacao;
-SELECT * FROM Sensores;
-SELECT * FROM Registros;
+SELECT * FROM Sensor;
+SELECT * FROM Registro;
 
-SELECT * FROM Empresas JOIN Cadastro ON Cadastro.fkEmpresa = Empresas.idEmpresa;
+SELECT * FROM cadEmpresa JOIN cadFunc ON cadFunc.fkToken = cadEmpresa.idEmpresa;
 
-SELECT * FROM Empresas JOIN Estacao ON Estacao.fkEmpresa = Empresas.idEmpresa;
+SELECT * FROM cadEmpresa JOIN Estacao ON Estacao.fkEmpresa = cadEmpresa.idEmpresa;
 
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao;
 
-SELECT * FROM Sensores JOIN Registros ON Registros.fkSensores = Sensores.idSensores;
+SELECT * FROM Sensor JOIN Registro ON Registro.fkSensor = Sensor.idSensor;
 
 -- Tatuapé
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 1;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 2;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 3;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 4;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 1;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 2;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 3;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 4;
 
 -- Paraiso
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 5;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 6;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 7;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 8;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 5;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 6;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 7;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 8;
 
 -- Santa Marina
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 9;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 10;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 11;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 12;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 9;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 10;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 11;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 12;
 
 -- Luz
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 13;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 14;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 15;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 16;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 13;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 14;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 15;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 16;
 
 -- Vila Prudente
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 17;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 18;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 19;
-SELECT * FROM Estacao JOIN Sensores ON Sensores.fkEstacao = Estacao.idEstacao JOIN Registros ON Registros.fkSensores = Sensores.idSensores WHERE idSensores = 20;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 17;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 18;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 19;
+SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao JOIN Registro ON Registro.fkSensor = Sensor.idSensor WHERE idSensor = 20;
 
 
