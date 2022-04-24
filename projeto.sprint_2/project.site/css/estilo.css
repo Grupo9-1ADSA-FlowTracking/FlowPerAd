@@ -324,7 +324,7 @@ header .container .navbar {
 .div_produto {
     display: flex;
     justify-content: center;
-    padding: 60px;
+    padding-top: 60px;
     height: 650px;
 }
 
@@ -374,14 +374,13 @@ header .container .navbar {
     padding-left: 22px;
     border: 1.5px solid #00c98300;
     border-radius: 5px;
-    background-color: #0bed9e7a;
     width: 400px;
     height: 40px;
     margin: 3px;
     margin-bottom: 10px;
     align-self: center;
     appearance: none;
-    color: whitesmoke;
+    color: black;
 }
 
 
@@ -410,6 +409,7 @@ input::-webkit-inner-spin-button {
     background-color: #00c982;
     color: black;
     cursor: pointer;
+    font-weight: bolder;
 }
 
 #div_simulacao {
@@ -421,8 +421,9 @@ input::-webkit-inner-spin-button {
 
 .div_simulador {
     border-top: 4px solid #009e67;
-    background-size: cover;
-    background-image: url(../imagens/all/banner2.jpg);
+    background-color: #030303;
+    /* background-size: cover; */
+    /* background-image: url(../imagens/all/banner2.jpg); */
     padding-top: 70px;
     display: flex;
     flex-direction: row;
@@ -453,8 +454,8 @@ input::-webkit-inner-spin-button {
 }
 
 .div_simulador .button_simulador {
-    background-color: #111111;
-    color: white;
+    background-color: #00c982;
+    color: black;
     width: 120px;
     display: flex;
     justify-content: center;
