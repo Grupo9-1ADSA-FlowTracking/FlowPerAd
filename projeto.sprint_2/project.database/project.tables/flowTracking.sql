@@ -204,6 +204,8 @@ SELECT * FROM Registro;
 
 SELECT * FROM cadEmpresa JOIN cadFunc ON cadFunc.fkToken = cadEmpresa.idEmpresa;
 
+SELECT * FROM cadEmpresa JOIN cadFunc ON cadFunc.fkToken = cadEmpresa.idEmpresa where cadEmpresa.idEmpresa = '02201';
+
 SELECT * FROM cadEmpresa JOIN Estacao ON Estacao.fkEmpresa = cadEmpresa.idEmpresa;
 
 SELECT * FROM Estacao JOIN Sensor ON Sensor.fkEstacao = Estacao.idEstacao;
