@@ -28,7 +28,7 @@
             <span class="form_inputs">
               Nome:
               <input
-                id="input_nome"
+                id="nome_input"
                 type="text"
                 placeholder="Ex: Fernando Brandão"
               />
@@ -36,28 +36,28 @@
             <span class="form_inputs">
               E-mail:
               <input
-                id="input_email"
+                id="email_input"
                 type="text"
                 placeholder="Ex: brandao@sptech.school"
               />
             </span>
             <span class="form_inputs">
               Token:
-              <input id="input_empresa" type="text" placeholder="Ex: *****" />
+              <input id="empresa_input" type="text" placeholder="Ex: *****" />
             </span>
             <br />
             <div class="form_inputs_senha">
               <span class="form_inputs">
                 Senha:
-                <input id="input_senha" type="password" />
+                <input id="senha_input" type="password" />
               </span>
               <span class="form_inputs">
                 Confirmação de senha:
-                <input id="input_Conf_senha" type="password" />
+                <input id="confirmacao_senha_input" type="password" />
               </span>
             </div>
           </div>
-          <div id="erro_mensagem"></div>
+          <div id="mensagem_erro"></div>
           <div id="cadastro_mensagem"></div>
           <div class="log_form_buttons">
             <button onclick="cadastrar()">Cadastrar</button>
@@ -105,60 +105,60 @@
 
 <script>
   function cadastrar() {
-    erro_mensagem.innerHTML = ``;
-    cadastro_mensagem.innerHTML = ``;
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var tokenVar = empresa_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    var nomeVar = input_nome.value;
-    var emailVar = input_email.value;
-    var empresaVar = input_empresa.value;
-    var senhaVar = input_senha.value;
-    var senhaconfVar = input_Conf_senha.value;
     if (
       nomeVar == "" ||
       emailVar == "" ||
-      empresaVar == "" ||
       senhaVar == "" ||
-      senhaconfVar == ""
+      confirmacaoSenhaVar == ""
     ) {
-      erro_mensagem.innerHTML = `Preencha todos os campos!`;
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
       return false;
-    } else if (senhaVar != senhaconfVar) {
-      erro_mensagem.innerHTML = `As senhas não batem!`;
-    } else {
-      fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // crie um atributo que recebe o valor recuperado aqui
-          // Agora vá para o arquivo routes/usuario.js
-          nomeServer: nomeVar,
-          emailServer: emailVar,
-          empresaServer: empresaVar,
-          senhaServer: senhaVar,
-        }),
-      })
-        .then(function (resposta) {
-          console.log("resposta: ", resposta);
-
-          if (resposta.ok) {
-
-            erro_mensagem.innerHTML =
-              "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-            setTimeout(() => {
-              window.location = "login.html";
-            }, "2000");
-          } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
-          }
-        })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-        });
-
-      return false;
+    } else if (emailVar.indexOf("@") > -1) {
+      mensagem_erro.innerHTML = "Email Inválido";
     }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        tokenServer: tokenVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
   }
 </script>
