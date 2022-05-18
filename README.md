@@ -1,2 +1,2 @@
-# FlowPerAd
-Seja Bem-Vindo ao Repositório Remoto da Equipe! Aqui estará guardado todo o nosso projeto de forma organizada para que tudo saia conforme o planejado.
+# API Projeto Site - 1º Semestre
+Esta API será utilizada para conectar seu Website do Projeto de PI ao Banco de Dados.
