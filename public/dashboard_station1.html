@@ -22,15 +22,34 @@
         </a>
       </div>
     </div>
-    <div class="sub_menu">
-      <a class="sub_menu_station" href="dashboard_station1.html"> Consolação </a>
-    </div>
+    <div class="nome_estacao">Consolação</div>
 
+    <div class="container_quartis">
     <div class="quartis">
-      <div class="">testandoo</div>
+      <div class="quartil quartilMin">
+        <h4>Péssimo fluxo</h4>
+        <h3>-1000 P/H</h3>
+      </div>
+      <div class="quartil quartil1">
+        <h4>Pouco fluxo</h4>
+        <h3>2000 P/H</h3>
+      </div>
+      <div class="quartil quartilMed">
+        <h4>Fluxo médio</h4>
+        <h3>3000 P/H</h3>
+      </div>
+      <div class="quartil quartil3">
+        <h4>Bom fluxo</h4>
+        <h3>4000 P/H</h3>
+      </div>
+      <div class="quartil quartilMax">
+        <h4>Ótimo fluxo</h4>
+        <h3>5000 P/H</h3>
+      </div>
     </div>
+  </div>
+    
     <div class="corpoGraf">
-
       <div class="conjunto1">
         <div class="caixa">
           <div class="grafLinha">
@@ -40,9 +59,6 @@
             <canvas id="linha2"></canvas>
           </div>
         </div>
-    </div>
-
-    <div class="conjunto2">
         <div class="caixa2">
           <div class="grafBarra">
             <canvas id="barra"></canvas>
@@ -52,103 +68,186 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </body>
 
   <script>
     const labels1 = [
-      '04:40',
-      '05:00',
-      '06:00',
-      '07:00',
-      '08:00',
-      '09:00',
-      '10:00',
-      '11:00',
-      '12:00',
-      '13:00',
-      '14:00',
-      '15:00',
-      '16:00',
-      '17:00',
-      '18:00',
-      '19:00',
-      '20:00',
-      '21:00',
-      '22:00',
-      '23:00',
-      '00:00',
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
-  
+
     const data1 = {
       labels: labels1,
-      datasets: [{
-        label: 'Catraca Norte',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
-      }]
-    };
-  
-    const config1 = {
-      type: 'line',
-      data: data1,
-      options: {}
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
+        },
+      ],
     };
 
-    
+    const config1 = {
+      type: "line",
+      data: data1,
+      options: {},
+    };
+
     const labels2 = [
-      '04:40',
-      '05:00',
-      '06:00',
-      '07:00',
-      '08:00',
-      '09:00',
-      '10:00',
-      '11:00',
-      '12:00',
-      '13:00',
-      '14:00',
-      '15:00',
-      '16:00',
-      '17:00',
-      '18:00',
-      '19:00',
-      '20:00',
-      '21:00',
-      '22:00',
-      '23:00',
-      '00:00',
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
-  
+
     const data2 = {
       labels: labels2,
-      datasets: [{
-        label: 'Catraca Sul',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [500, , , , , , , ],
-      }]
+      datasets: [
+        {
+          label: "Catraca Sul",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [500, , , , , , ,],
+        },
+      ],
     };
-  
+
     const config2 = {
-      type: 'line',
+      type: "line",
       data: data2,
-      options: {}
+      options: {},
+    };
+
+    const labels3 = [
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
+    ];
+
+    const data3 = {
+      labels: labels3,
+      datasets: [
+        {
+          label: "Catracas",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
+        },
+      ],
+    };
+
+    const config3 = {
+      type: "bar",
+      data: data3,
+      options: {},
+    };
+
+    const labels4 = [
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
+    ];
+
+    const data4 = {
+      labels: labels4,
+      datasets: [
+        {
+          label: "Catracas",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
+        },
+      ],
+    };
+
+    const config4 = {
+      type: "bar",
+      data: data4,
+      options: {},
     };
   </script>
 
-<script>
-  const linha1 = new Chart(
-    document.getElementById('linha1'),
-    config1
-  );
+  <script>
+    const linha1 = new Chart(document.getElementById("linha1"), config1);
 
-  const linha2 = new Chart(
-    document.getElementById('linha2'),
-    config2
-  );
-</script>
+    const linha2 = new Chart(document.getElementById("linha2"), config2);
 
+    const barras = new Chart(document.getElementById("barra"), config3);
+
+    const calor = new Chart(document.getElementById("calor"), config3);
+  </script>
 </html>
-

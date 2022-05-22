@@ -24,15 +24,11 @@ p {
 h4 {
   font-size: 40px;
   color: #00c982;
-  display: flex;
-  justify-content: center;
   margin-top: 40px;
   margin-bottom: 15px;
 }
 
 h2 {
-  display: flex;
-  justify-content: center;
   font-size: 25px;
   color: #00c982;
 }
@@ -232,6 +228,7 @@ header .container .navbar {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   width: 90%;
   margin: auto;
   /* border: 3px solid palegreen; */
@@ -240,11 +237,6 @@ header .container .navbar {
 .div_sobrenos_perfis {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-}
-
-.div_sobrenos .container2 {
-  display: flex;
   justify-content: center;
 }
 
@@ -331,6 +323,9 @@ header .container .navbar {
 .div_produto .container {
   width: 80%;
   height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .div_produto_conteudo {
@@ -1011,9 +1006,34 @@ input::-webkit-inner-spin-button {
   margin-right: 20px;
 }
 
+.container_quartis{
+  display: flex;
+  justify-content: center;
+}
+
+.quartis{
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.quartil{
+  border: 1px solid cyan;
+}
+
+.quartil h4{
+  font-size: 15px;
+}
+
+.quartil h3{
+  font-size: 12px;
+}
+
 .corpoGraf{
   width: 100%;
-  height: 640px;
+  height: 750px;
   border: 1px solid pink;
   display: flex;
   justify-content: space-between;
@@ -1021,24 +1041,22 @@ input::-webkit-inner-spin-button {
 
 .corpoGraf .conjunto1{
   border: 1px solid red;
-  width: 71%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .corpoGraf .conjunto1 .grafLinha{
   /* border: 1px solid red; */
-  width: 50%;
+  width: 35%;
   height: 319px;
-}
-
-.corpoGraf .conjunto2{
-  border: 1px solid blue;
-  width: 25%;
-  height: 100%;
 }
 
 .corpoGraf .caixa{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .corpoGraf .caixa #linha1{
@@ -1051,12 +1069,20 @@ input::-webkit-inner-spin-button {
 
 .corpoGraf .caixa2{
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .corpoGraf .caixa2 #barra{
   border: 1px solid black;
+}
+
+.corpoGraf .conjunto1 .grafBarra{
+  width: 35%;
+}
+
+.corpoGraf .conjunto1 .grafCalor{
+  width: 35%;
 }
 
 .corpoGraf .caixa2 #calor{
