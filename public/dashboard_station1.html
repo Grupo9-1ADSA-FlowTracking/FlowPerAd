@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css\estilo.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowTracking - Dashboard</title>
+  </head>
+
+  <body class="dashboard_viewport">
+    <div class="dashboard_menu">
+      <span class="dashboard_logo_box">
+        <img class="dashboard_logo" src="imagens/logos/logo3.png" />
+      </span>
+      <div class="dashboard_div_login">
+        <img class="dashboard_menu_img" src="imagens/all/perfil.png" />
+        <h6>Cliente</h6>
+        <a href="login.html">
+          <img class="logout_img" src="imagens/all/logout.png" />
+        </a>
+      </div>
+    </div>
+    <div class="sub_menu">
+      <a class="sub_menu_station" href="dashboard_station1.html"> Consolação </a>
+    </div>
+
+    <div class="quartis">
+      <div class="">testando</div>
+    </div>
+    <div class="corpoGraf">
+
+      <div class="conjunto1">
+        <div class="caixa">
+          <div class="grafLinha">
+            <canvas id="linha1"></canvas>
+          </div>
+          <div class="grafLinha">
+            <canvas id="linha2"></canvas>
+          </div>
+        </div>
+    </div>
+
+    <div class="conjunto2">
+        <div class="caixa2">
+          <div class="grafBarra">
+            <canvas id="barra"></canvas>
+          </div>
+          <div class="grafCalor">
+            <canvas id="calor"></canvas>
+          </div>
+        </div>
+      </div>
+  </div>
+  </body>
+
+  <script>
+    const labels1 = [
+      '04:40',
+      '05:00',
+      '06:00',
+      '07:00',
+      '08:00',
+      '09:00',
+      '10:00',
+      '11:00',
+      '12:00',
+      '13:00',
+      '14:00',
+      '15:00',
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+      '20:00',
+      '21:00',
+      '22:00',
+      '23:00',
+      '00:00',
+    ];
+  
+    const data1 = {
+      labels: labels1,
+      datasets: [{
+        label: 'Catraca Norte',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
+      }]
+    };
+  
+    const config1 = {
+      type: 'line',
+      data: data1,
+      options: {}
+    };
+
+    
+    const labels2 = [
+      '04:40',
+      '05:00',
+      '06:00',
+      '07:00',
+      '08:00',
+      '09:00',
+      '10:00',
+      '11:00',
+      '12:00',
+      '13:00',
+      '14:00',
+      '15:00',
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+      '20:00',
+      '21:00',
+      '22:00',
+      '23:00',
+      '00:00',
+    ];
+  
+    const data2 = {
+      labels: labels2,
+      datasets: [{
+        label: 'Catraca Sul',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [500, , , , , , , ],
+      }]
+    };
+  
+    const config2 = {
+      type: 'line',
+      data: data2,
+      options: {}
+    };
+  </script>
+
+<script>
+  const linha1 = new Chart(
+    document.getElementById('linha1'),
+    config1
+  );
+
+  const linha2 = new Chart(
+    document.getElementById('linha2'),
+    config2
+  );
+</script>
+
+</html>
+

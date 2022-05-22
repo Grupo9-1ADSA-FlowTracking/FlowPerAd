@@ -953,7 +953,7 @@ input::-webkit-inner-spin-button {
 
 /* Dashboard Stations */
 
-/* .dashboard_viewport {
+.dashboard_viewport {
   margin: 0;
   font-family: sans-serif;
   background-color: #f1f1f1;
@@ -967,9 +967,6 @@ input::-webkit-inner-spin-button {
   width: 100%;
   background-color: #030303;
   border-bottom: 5px solid #00c982;
-  position: fixed;
-  z-index: 3;
-  padding: 10px;
   align-items: center;
   justify-content: center;
 }
@@ -1014,203 +1011,54 @@ input::-webkit-inner-spin-button {
   margin-right: 20px;
 }
 
-.sub_menu {
+.corpoGraf{
   width: 100%;
-  height: 6vh;
-  background-color: #e0e0e0;
-  margin-top: 75px;
-  position: fixed;
-  z-index: 3;
+  height: 640px;
+  border: 1px solid pink;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
-.sub_menu_station {
-  margin: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  text-decoration: none;
-  color: white;
-  background-color: #00c982;
-  height: 22px;
-  border-radius: 5px;
+.corpoGraf .conjunto1{
+  border: 1px solid red;
+  width: 71%;
 }
 
-.sub_menu_station_news {
-  margin: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  text-decoration: none;
-  color: white;
-  background-color: #009e67;
-  height: 22px;
-  border-radius: 5px;
+.corpoGraf .conjunto1 .grafLinha{
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 319px;
 }
 
-.sub_menu_station:hover {
-  color: black;
-  background-color: whitesmoke;
-  transition: 0.5s;
-}
-
-.sub_menu_station_news:hover {
-  color: black;
-  background-color: whitesmoke;
-  transition: 0.5s;
-}
-
-.flow_box {
-  margin-top: 12%;
-  height: 2000px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.flow_container {
-  width: 80%;
+.corpoGraf .conjunto2{
+  border: 1px solid blue;
+  width: 25%;
   height: 100%;
+}
+
+.corpoGraf .caixa{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.logo_flow_box {
-  width: 150px;
+.corpoGraf .caixa #linha1{
+  border: 1px solid black;
 }
 
-.graphs_box {
-  width: 80%;
+.corpoGraf .caixa #linha2{
+  border: 1px solid yellow;
+}
+
+.corpoGraf .caixa2{
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.div_graph {
-  width: 80%;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 50px;
 }
 
-.graphs_box_rel {
-  width: 40%;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-} */
-
-/* DASHBOARD  */
-
-.dashPag1{
-  margin: 0%;
-  padding: 0%;
-  background-color: #141414;
-  display: flex;
+.corpoGraf .caixa2 #barra{
+  border: 1px solid black;
 }
 
-.dashPag1 h4{
-  padding: 0;
-}
-
-.dashPag1 h3{
-  padding: 0;
-  color: white;
-}
-
-.dashPag1 .header{
-  border-right: 3px solid #00F49D;
-  display: flex;
-  width: 335px;
-  height: 757px;
-  align-items: center;
-  justify-content: center;
-  background-color: #252525;
-
-}
-
-.dashPag1 .header .caixa{
-  display: flex;
-  /* border: 1px solid black; */
-  flex-direction: column;
-  width: 100%;
-  height: 600px;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.dashPag1 button{
-  width: 155px;
-  height: 45px;
-  background-color: #00F49D;
-  border-color: #22926b;
-  border-style: solid;
-  border-radius: 10px;
-  color: #dfdfdf;
-  font-weight: 900;
-  font-size: 15px;
-}
-
-
-
-.dashPag1 .corpo .quartis{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 1100px;
-  margin-top: 30px;
-}
-
-.dashPag1 .corpo .quartilMin{
-  width: 170px;
-  height: 155px;
-  border: 1px solid white;
-  background-color: red;
-}
-
-.dashPag1 .corpo .quartil1{
-  width: 170px;
-  height: 155px;
-  border: 1px solid white;
-  background-color: orange;
-}
-
-.dashPag1 .corpo .quartilMed{
-  width: 170px;
-  height: 155px;
-  border: 1px solid white;
-  background-color: yellow;
-}
-
-.dashPag1 .corpo .quartil3{
-  width: 170px;
-  height: 155px;
-  border: 1px solid white;
-  background-color: rgb(136, 248, 136);
-}
-
-.dashPag1 .corpo .quartilMax{
-  width: 170px;
-  height: 155px;
-  border: 1px solid white;
-  background-color: green;
-}
-
-.dashPag1 .corpo h4{
-  font-size: 20px;
-  color: black;
-}
-
-.dashPag1 .corpo h2{
-  font-size: 25px;
-  color: black;
+.corpoGraf .caixa2 #calor{
+  border: 1px solid black;
 }
