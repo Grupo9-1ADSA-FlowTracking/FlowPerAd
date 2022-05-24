@@ -67,17 +67,24 @@
               </div>
             </div>
             <div class="caixa2">
-              <div class="grafBarra">
-                <canvas id="barra"></canvas>
+              <div class="grafLinha">
+                <canvas id="linha3"></canvas>
               </div>
-              <div class="grafCalor">
-                <canvas id="calor"></canvas>
+              <div class="grafLinha">
+                <canvas id="linha4"></canvas>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="dashboard_container2"></div>
+      <div class="dashboard_container2">
+        <div class="grafBarra">
+          <canvas id="barra"></canvas>
+        </div>
+        <div class="grafCalor">
+          <canvas id="calor"></canvas>
+        </div>
+      </div>
     </div>
   </body>
 
@@ -332,11 +339,67 @@
             500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
           ],
         },
+        {
+          label: "",
+          backgroundColor: "#00c982",
+          borderColor: "#00c982",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "green",
+          borderColor: "green",
+          radius: "0",
+          borderWidth: "1",
+
+          data: [
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "orange",
+          borderColor: "orange",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(226, 60, 0)",
+          borderColor: "rgb(226, 60, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(218, 0, 0)",
+          borderColor: "rgb(218, 0, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
+            999, 999, 999, 999, 999, 999, 999, 999,
+          ],
+        },
       ],
     };
 
     const config3 = {
-      type: "bar",
+      type: "line",
       data: data3,
       options: {},
     };
@@ -374,13 +437,173 @@
           borderColor: "#038800",
           data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
         },
+        {
+          label: "",
+          backgroundColor: "#00c982",
+          borderColor: "#00c982",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "green",
+          borderColor: "green",
+          radius: "0",
+          borderWidth: "1",
+
+          data: [
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "orange",
+          borderColor: "orange",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(226, 60, 0)",
+          borderColor: "rgb(226, 60, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(218, 0, 0)",
+          borderColor: "rgb(218, 0, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
+            999, 999, 999, 999, 999, 999, 999, 999,
+          ],
+        },
       ],
     };
 
     const config4 = {
-      type: "bar",
+      type: "line",
       data: data4,
       options: {},
+    };
+
+    const labels5 = [
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
+    ];
+
+    const data5 = {
+      labels: labels5,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          borderWidth: "3",
+          data: [
+            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+          ],
+        },
+      ],
+    };
+
+    const config5 = {
+      type: "bar",
+      data: data5,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+      },
+    };
+
+    const labels6 = [
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
+    ];
+
+    const data6 = {
+      labels: labels6,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          borderWidth: "3",
+          data: [
+            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+          ],
+        },
+      ],
+    };
+
+    const config6 = {
+      type: "bar",
+      data: data6,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+      },
     };
   </script>
 
@@ -389,8 +612,12 @@
 
     const linha2 = new Chart(document.getElementById("linha2"), config2);
 
-    const barras = new Chart(document.getElementById("barra"), config3);
+    const linha3 = new Chart(document.getElementById("linha3"), config3);
 
-    const calor = new Chart(document.getElementById("calor"), config3);
+    const linha4 = new Chart(document.getElementById("linha4"), config4);
+
+    const barra = new Chart(document.getElementById("barra"), config5);
+
+    const calor = new Chart(document.getElementById("calor"), config6);
   </script>
 </html>
