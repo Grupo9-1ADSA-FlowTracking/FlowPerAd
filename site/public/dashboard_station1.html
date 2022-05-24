@@ -1,327 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css\estilo.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowTracking - Dashboard</title>
-</head>
+  </head>
 
-<body class="dashboard_viewport">
+  <body class="dashboard_viewport">
+    <!-- Menu -->
     <div class="dashboard_menu">
-        <span class="dashboard_logo_box">
-        <img class="dashboard_logo" src="imagens/logos/logo3.png" />
-      </span>
-        <div class="dashboard_div_login">
-            <img class="dashboard_menu_img" src="imagens/all/perfil.png" />
-            <h6>Cliente</h6>
-            <a href="login.html">
-                <img class="logout_img" src="imagens/all/logout.png" />
-            </a>
+      <div class="menu_container">
+        <div class="dashboard_logo_box">
+          <img class="dashboard_logo" src="../public/imagens/logos/logo3.png" />
         </div>
+        <div class="menu_buttons">
+          <button class="button_estacao">Consolação</button>
+        </div>
+        <div class="menu_logout">
+          <a class="menu_perfil" href="">
+            <img class="logout_pic" src="../public/imagens/all/perfil.png" />
+            <h5 id="b_usuario">Undefined</h5>
+          </a>
+          <a href="" class="div_sair">
+            <img class="sair_pic" src="../public/imagens/all/logout.png" />
+            <h5>Sair</h5>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="estacoes">
-        <button>
-          Consolação
-        </button>
-    </div>
-
-    <div class="container_quartis">
-        <div class="quartil quartilMin">
-            <h4>Péssimo fluxo</h4>
+    <div class="dashboard_display">
+      <div class="dashboard_container1">
+        <div class="container_quartis">
+          <div class="quartil quartilMin">
+            <h4>Péssimo Fluxo</h4>
             <h3>-1000 P/H</h3>
-        </div>
-        <div class="quartil quartil1">
-            <h4>Pouco fluxo</h4>
+          </div>
+          <div class="quartil quartil1">
+            <h4>Pouco Fluxo</h4>
             <h3>2000 P/H</h3>
-        </div>
-        <div class="quartil quartilMed">
-            <h4>Fluxo médio</h4>
+          </div>
+          <div class="quartil quartilMed">
+            <h4>Fluxo Médio</h4>
             <h3>3000 P/H</h3>
-        </div>
-        <div class="quartil quartil3">
-            <h4>Bom fluxo</h4>
+          </div>
+          <div class="quartil quartil3">
+            <h4>Bom Fluxo</h4>
             <h3>4000 P/H</h3>
-        </div>
-        <div class="quartil quartilMax">
-            <h4>Ótimo fluxo</h4>
+          </div>
+          <div class="quartil quartilMax">
+            <h4>Ótimo Fluxo</h4>
             <h3>5000 P/H</h3>
+          </div>
         </div>
-    </div>
 
-    <div class="corpoGraf">
-        <div class="conjunto1">
+        <div class="corpoGraf">
+          <div class="conjunto1">
             <div class="caixa">
-                <div class="grafLinha">
-                    <canvas id="linha1"></canvas>
-                </div>
-                <div class="grafLinha">
-                    <canvas id="linha2"></canvas>
-                </div>
+              <div class="grafLinha">
+                <canvas id="linha1"></canvas>
+              </div>
+              <div class="grafLinha">
+                <canvas id="linha2"></canvas>
+              </div>
             </div>
             <div class="caixa2">
-                <div class="grafBarra">
-                    <canvas id="barra"></canvas>
-                </div>
-                <div class="grafCalor">
-                    <canvas id="calor"></canvas>
-                </div>
+              <div class="grafBarra">
+                <canvas id="barra"></canvas>
+              </div>
+              <div class="grafCalor">
+                <canvas id="calor"></canvas>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="dashboard_container2"></div>
     </div>
-</body>
+  </body>
 
-<script>
+  <script>
     const labels1 = [
-        "04:40",
-        "05:00",
-        "06:00",
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-        "23:00",
-        "00:00",
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
 
     const data1 = {
-        labels: labels1,
-        datasets: [{
-            label: "Catraca Norte",
-            backgroundColor: "#038800",
-            borderColor: "#038800",
-            borderWidth: "3",
-            data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800],
-        }, {
-            label: "",
-            backgroundColor: "#00c982",
-            borderColor: "#00c982",
-            radius: "0",
-            borderWidth: "1",
-            data: [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
-        }, {
-            label: "",
-            backgroundColor: "green",
-            borderColor: "green",
-            radius: "0",
-            borderWidth: "1",
+      labels: labels1,
+      datasets: [
+        {
+          label: "Catraca Norte",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          borderWidth: "3",
+          data: [
+            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "#00c982",
+          borderColor: "#00c982",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "green",
+          borderColor: "green",
+          radius: "0",
+          borderWidth: "1",
 
-            data: [4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000],
-        }, {
-            label: "",
-            backgroundColor: "orange",
-            borderColor: "orange",
-            radius: "0",
-            borderWidth: "1",
-            data: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000],
-        }, {
-            label: "",
-            backgroundColor: "rgb(226, 60, 0)",
-            borderColor: "rgb(226, 60, 0)",
-            radius: "0",
-            borderWidth: "1",
-            data: [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
-        }, {
-            label: "",
-            backgroundColor: "rgb(218, 0, 0)",
-            borderColor: "rgb(218, 0, 0)",
-            radius: "0",
-            borderWidth: "1",
-            data: [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999],
-        }, ],
+          data: [
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "orange",
+          borderColor: "orange",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(226, 60, 0)",
+          borderColor: "rgb(226, 60, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(218, 0, 0)",
+          borderColor: "rgb(218, 0, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
+            999, 999, 999, 999, 999, 999, 999, 999,
+          ],
+        },
+      ],
     };
 
     const config1 = {
-        type: "line",
-        data: data1,
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
+      type: "line",
+      data: data1,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
         },
+      },
     };
 
     const labels2 = [
-        "04:40",
-        "05:00",
-        "06:00",
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-        "23:00",
-        "00:00",
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
 
     const data2 = {
-        labels: labels2,
-        datasets: [{
-            label: "Catraca Sul",
-            backgroundColor: "#038800",
-            borderColor: "#038800",
-            data: [500, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800],
-        }, {
-            label: "",
-            backgroundColor: "#00c982",
-            borderColor: "#00c982",
-            radius: "0",
-            borderWidth: "1",
-            data: [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
-        }, {
-            label: "",
-            backgroundColor: "green",
-            borderColor: "green",
-            radius: "0",
-            borderWidth: "1",
+      labels: labels2,
+      datasets: [
+        {
+          label: "Catraca Sul",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          data: [
+            500, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600,
+            800, 1500, 1700, 1600, 800,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "#00c982",
+          borderColor: "#00c982",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "green",
+          borderColor: "green",
+          radius: "0",
+          borderWidth: "1",
 
-            data: [4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000],
-        }, {
-            label: "",
-            backgroundColor: "orange",
-            borderColor: "orange",
-            radius: "0",
-            borderWidth: "1",
-            data: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000],
-        }, {
-            label: "",
-            backgroundColor: "rgb(226, 60, 0)",
-            borderColor: "rgb(226, 60, 0)",
-            radius: "0",
-            borderWidth: "1",
-            data: [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
-        }, {
-            label: "",
-            backgroundColor: "rgb(218, 0, 0)",
-            borderColor: "rgb(218, 0, 0)",
-            radius: "0",
-            borderWidth: "1",
-            data: [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999],
-        }, ],
+          data: [
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "orange",
+          borderColor: "orange",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(226, 60, 0)",
+          borderColor: "rgb(226, 60, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
+          ],
+        },
+        {
+          label: "",
+          backgroundColor: "rgb(218, 0, 0)",
+          borderColor: "rgb(218, 0, 0)",
+          radius: "0",
+          borderWidth: "1",
+          data: [
+            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
+            999, 999, 999, 999, 999, 999, 999, 999,
+          ],
+        },
+      ],
     };
 
     const config2 = {
-        type: "line",
-        data: data2,
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
+      type: "line",
+      data: data2,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
         },
+      },
     };
 
     const labels3 = [
-        "04:40",
-        "05:00",
-        "06:00",
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-        "23:00",
-        "00:00",
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
 
     const data3 = {
-        labels: labels3,
-        datasets: [{
-            label: "Catracas",
-            backgroundColor: "#038800",
-            borderColor: "#038800",
-            data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800],
-        }, ],
+      labels: labels3,
+      datasets: [
+        {
+          label: "Catracas",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          data: [
+            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
+          ],
+        },
+      ],
     };
 
     const config3 = {
-        type: "bar",
-        data: data3,
-        options: {},
+      type: "bar",
+      data: data3,
+      options: {},
     };
 
     const labels4 = [
-        "04:40",
-        "05:00",
-        "06:00",
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-        "23:00",
-        "00:00",
+      "04:40",
+      "05:00",
+      "06:00",
+      "07:00",
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00",
+      "00:00",
     ];
 
     const data4 = {
-        labels: labels4,
-        datasets: [{
-            label: "Catracas",
-            backgroundColor: "#038800",
-            borderColor: "#038800",
-            data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
-        }, ],
+      labels: labels4,
+      datasets: [
+        {
+          label: "Catracas",
+          backgroundColor: "#038800",
+          borderColor: "#038800",
+          data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
+        },
+      ],
     };
 
     const config4 = {
-        type: "bar",
-        data: data4,
-        options: {},
+      type: "bar",
+      data: data4,
+      options: {},
     };
-</script>
+  </script>
 
-<script>
+  <script>
     const linha1 = new Chart(document.getElementById("linha1"), config1);
 
     const linha2 = new Chart(document.getElementById("linha2"), config2);
@@ -329,6 +392,5 @@
     const barras = new Chart(document.getElementById("barra"), config3);
 
     const calor = new Chart(document.getElementById("calor"), config3);
-</script>
-
+  </script>
 </html>
