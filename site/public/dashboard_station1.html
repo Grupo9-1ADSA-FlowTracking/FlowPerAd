@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowTracking - Dashboard</title>
+    <script src="../js/funcoes.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
   </head>
 
   <body class="dashboard_viewport">
@@ -89,535 +91,137 @@
   </body>
 
   <script>
-    const labels1 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
+    let proximaAtualizacao;
 
-    const data1 = {
-      labels: labels1,
-      datasets: [
-        {
-          label: "Catraca Norte",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          borderWidth: "3",
-          data: [
-            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "#00c982",
-          borderColor: "#00c982",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "green",
-          borderColor: "green",
-          radius: "0",
-          borderWidth: "1",
+    window.onload = obterDadosGrafico(1);
 
-          data: [
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "orange",
-          borderColor: "orange",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(226, 60, 0)",
-          borderColor: "rgb(226, 60, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(218, 0, 0)",
-          borderColor: "rgb(218, 0, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
-            999, 999, 999, 999, 999, 999, 999, 999,
-          ],
-        },
-      ],
-    };
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    function obterDadosGrafico(idArduino) {
+      if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+      }
 
-    const config1 = {
-      type: "line",
-      data: data1,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
+      fetch(`/medidas/ultimas/${idArduino}`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (resposta) {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              resposta.reverse();
+
+              plotarGrafico(resposta, idArduino);
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+
+    function plotarGrafico(resposta, idArduino) {
+      console.log("iniciando plotagem do gráfico...");
+
+      var dados = {
+        labels: [],
+        datasets: [
+          {
+            yAxisID: "y-chave",
+            label: "Registros",
+            borderColor: "#32B9CD",
+            backgroundColor: "#32b9cd8f",
+            fill: true,
+            data: [],
+          },
+        ],
+      };
+
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.momento_grafico);
+        dados.datasets[0].data.push(registro.chave);
+      }
+
+      console.log(JSON.stringify(dados));
+
+      var ctx = linha1.getContext("2d");
+      window.grafico_linha = Chart.Line(ctx, {
+        data: dados,
+        options: {
+          responsive: true,
+          animation: { duration: 500 },
+          hoverMode: "index",
+          stacked: false,
+          title: {
+            display: true,
+            text: "Dados capturados",
+          },
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                display: true,
+                position: "left",
+                id: "y-chave",
+                ticks: {
+                  beginAtZero: true,
+                  max: 1,
+                  min: 0,
+                },
+
+                gridLines: {
+                  drawOnChartArea: true,
+                },
+              },
+            ],
           },
         },
-      },
-    };
+      });
 
-    const labels2 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
+      setTimeout(() => atualizarGrafico(idArduino, dados), 2000);
+    }
+    function atualizarGrafico(idArduino, dados) {
+      fetch(`/medidas/tempo-real/${idArduino}`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (novoRegistro) {
+              console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+              console.log(`Dados atuais do gráfico: ${dados}`);
 
-    const data2 = {
-      labels: labels2,
-      datasets: [
-        {
-          label: "Catraca Sul",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          data: [
-            500, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800, 1500, 1700, 1600,
-            800, 1500, 1700, 1600, 800,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "#00c982",
-          borderColor: "#00c982",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "green",
-          borderColor: "green",
-          radius: "0",
-          borderWidth: "1",
+              // tirando e colocando valores no gráfico
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-          data: [
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "orange",
-          borderColor: "orange",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(226, 60, 0)",
-          borderColor: "rgb(226, 60, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(218, 0, 0)",
-          borderColor: "rgb(218, 0, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
-            999, 999, 999, 999, 999, 999, 999, 999,
-          ],
-        },
-      ],
-    };
+              dados.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dados.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
 
-    const config2 = {
-      type: "line",
-      data: data2,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    };
+              // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+              // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-    const labels3 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
+              window.grafico_linha.update();
 
-    const data3 = {
-      labels: labels3,
-      datasets: [
-        {
-          label: "Catracas",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          data: [
-            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "#00c982",
-          borderColor: "#00c982",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "green",
-          borderColor: "green",
-          radius: "0",
-          borderWidth: "1",
-
-          data: [
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "orange",
-          borderColor: "orange",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(226, 60, 0)",
-          borderColor: "rgb(226, 60, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(218, 0, 0)",
-          borderColor: "rgb(218, 0, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
-            999, 999, 999, 999, 999, 999, 999, 999,
-          ],
-        },
-      ],
-    };
-
-    const config3 = {
-      type: "line",
-      data: data3,
-      options: {},
-    };
-
-    const labels4 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
-
-    const data4 = {
-      labels: labels4,
-      datasets: [
-        {
-          label: "Catracas",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          data: [500, 800, 4300, 3200, 1500, 1700, 1600, 800],
-        },
-        {
-          label: "",
-          backgroundColor: "#00c982",
-          borderColor: "#00c982",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "green",
-          borderColor: "green",
-          radius: "0",
-          borderWidth: "1",
-
-          data: [
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-            4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000, 4000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "orange",
-          borderColor: "orange",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-            3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(226, 60, 0)",
-          borderColor: "rgb(226, 60, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-            2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,
-          ],
-        },
-        {
-          label: "",
-          backgroundColor: "rgb(218, 0, 0)",
-          borderColor: "rgb(218, 0, 0)",
-          radius: "0",
-          borderWidth: "1",
-          data: [
-            999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,
-            999, 999, 999, 999, 999, 999, 999, 999,
-          ],
-        },
-      ],
-    };
-
-    const config4 = {
-      type: "line",
-      data: data4,
-      options: {},
-    };
-
-    const labels5 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
-
-    const data5 = {
-      labels: labels5,
-      datasets: [
-        {
-          label: "Catraca Norte",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          borderWidth: "3",
-          data: [
-            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-          ],
-        },
-      ],
-    };
-
-    const config5 = {
-      type: "bar",
-      data: data5,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    };
-
-    const labels6 = [
-      "04:40",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-      "00:00",
-    ];
-
-    const data6 = {
-      labels: labels6,
-      datasets: [
-        {
-          label: "Catraca Norte",
-          backgroundColor: "#038800",
-          borderColor: "#038800",
-          borderWidth: "3",
-          data: [
-            500, 800, 4300, 3200, 1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-            1500, 1700, 1600, 800, 1500, 1700, 1600, 800,
-          ],
-        },
-      ],
-    };
-
-    const config6 = {
-      type: "bar",
-      data: data6,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    };
-  </script>
-
-  <script>
-    const linha1 = new Chart(document.getElementById("linha1"), config1);
-
-    const linha2 = new Chart(document.getElementById("linha2"), config2);
-
-    const linha3 = new Chart(document.getElementById("linha3"), config3);
-
-    const linha4 = new Chart(document.getElementById("linha4"), config4);
-
-    const barra = new Chart(document.getElementById("barra"), config5);
-
-    const calor = new Chart(document.getElementById("calor"), config6);
+              // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+              proximaAtualizacao = setTimeout(
+                () => atualizarGrafico(idArduino, dados),
+                2000
+              );
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(
+              () => atualizarGrafico(idArduino, dados),
+              2000
+            );
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
   </script>
 </html>
