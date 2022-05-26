@@ -16,7 +16,7 @@ function buscarUltimasMedidas(idArduino, limite_linhas) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select chave as registro, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
         from Registro
-        where fkArduino = 1
+        where fkArduino = ${idArduino}
         order by idRegistro desc limit 10;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -41,9 +41,9 @@ function buscarMedidasEmTempoReal(idArduino) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select chave as chave, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
+        instrucaoSql = `select chave as registro, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
         from Registro
-        where fkArduino = 1
+        where fkArduino = ${idArduino}
         order by idRegistro desc limit 10`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");

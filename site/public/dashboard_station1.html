@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowTracking - Dashboard</title>
-    <script src="../js/funcoes.js"></script>
     <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
   </head>
 
@@ -62,18 +61,18 @@
           <div class="conjunto1">
             <div class="caixa">
               <div class="grafLinha">
-                <canvas id="linha1"></canvas>
+                <canvas id="linhaNorte"></canvas>
               </div>
               <div class="grafLinha">
-                <canvas id="linha2"></canvas>
+                <canvas id="linhaSul"></canvas>
               </div>
             </div>
             <div class="caixa2">
               <div class="grafLinha">
-                <canvas id="linha3"></canvas>
+                <canvas id="linhaLeste"></canvas>
               </div>
               <div class="grafLinha">
-                <canvas id="linha4"></canvas>
+                <canvas id="linhaOeste"></canvas>
               </div>
             </div>
           </div>
@@ -94,8 +93,13 @@
     let proximaAtualizacao;
 
     window.onload = obterDadosGrafico(1);
+    window.onload = obterDadosGrafico(2);
+    window.onload = obterDadosGrafico(3);
+    window.onload = obterDadosGrafico(4);
+
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    
     function obterDadosGrafico(idArduino) {
       if (proximaAtualizacao != undefined) {
         clearTimeout(proximaAtualizacao);
@@ -123,8 +127,9 @@
 
     function plotarGrafico(resposta, idArduino) {
       console.log("iniciando plotagem do gráfico...");
+      console.log(resposta)
 
-      var dados = {
+      var dadosNorte = {
         labels: [],
         datasets: [
           {
@@ -138,17 +143,77 @@
         ],
       };
 
+      var dadosSul = {
+        labels: [],
+        datasets: [
+          {
+            yAxisID: "y-chave",
+            label: "Registros",
+            borderColor: "#32B9CD",
+            backgroundColor: "#32b9cd8f",
+            fill: true,
+            data: [],
+          },
+        ],
+      };
+
+      var dadosLeste = {
+        labels: [],
+        datasets: [
+          {
+            yAxisID: "y-chave",
+            label: "Registros",
+            borderColor: "#32B9CD",
+            backgroundColor: "#32b9cd8f",
+            fill: true,
+            data: [],
+          },
+        ],
+      };
+
+      var dadosOeste = {
+        labels: [],
+        datasets: [
+          {
+            yAxisID: "y-chave",
+            label: "Registros",
+            borderColor: "#32B9CD",
+            backgroundColor: "#32b9cd8f",
+            fill: true,
+            data: [],
+          },
+        ],
+      };
+      
+
       for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
-        dados.labels.push(registro.momento_grafico);
-        dados.datasets[0].data.push(registro.chave);
+        dadosNorte.labels.push(registro.momento_grafico);
+        dadosSul.labels.push(registro.momento_grafico);
+        dadosLeste.labels.push(registro.momento_grafico);
+        dadosOeste.labels.push(registro.momento_grafico);
+        dadosNorte.datasets[0].data.push(registro.chave);
+        dadosSul.datasets[0].data.push(registro.chave);
+        dadosLeste.datasets[0].data.push(registro.chave);
+        dadosOeste.datasets[0].data.push(registro.chave);
+        console.log(registro.registro)
       }
 
-      console.log(JSON.stringify(dados));
+      console.log("Dados da norte")
+      console.log(dadosNorte.datasets[0].data);
+      console.log("Dados da sul")
+      console.log(dadosSul.datasets[0].data);
+      console.log("Dados da leste")
+      console.log(dadosLeste.datasets[0].data);
+      console.log("Dados da oeste")
+      console.log(dadosOeste.datasets[0].data);
 
-      var ctx = linha1.getContext("2d");
-      window.grafico_linha = Chart.Line(ctx, {
-        data: dados,
+
+      console.log(JSON.stringify(dadosNorte));
+
+      var ctxNorte = linhaNorte.getContext("2d");
+      window.grafico_linha = Chart.Line(ctxNorte, {
+        data: dadosNorte,
         options: {
           responsive: true,
           animation: { duration: 500 },
@@ -156,7 +221,7 @@
           stacked: false,
           title: {
             display: true,
-            text: "Dados capturados",
+            text: "Dados capturados - Catracas norte",
           },
           scales: {
             yAxes: [
@@ -180,22 +245,137 @@
         },
       });
 
-      setTimeout(() => atualizarGrafico(idArduino, dados), 2000);
+      var ctxSul = linhaSul.getContext("2d");
+      window.grafico_linha = Chart.Line(ctxSul, {
+        data: dadosSul,
+        options: {
+          responsive: true,
+          animation: { duration: 500 },
+          hoverMode: "index",
+          stacked: false,
+          title: {
+            display: true,
+            text: "Dados capturados - Catracas Sul",
+          },
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                display: true,
+                position: "left",
+                id: "y-chave",
+                ticks: {
+                  beginAtZero: true,
+                  max: 1,
+                  min: 0,
+                },
+
+                gridLines: {
+                  drawOnChartArea: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      var ctxLeste = linhaLeste.getContext("2d");
+      window.grafico_linha = Chart.Line(ctxLeste, {
+        data: dadosLeste,
+        options: {
+          responsive: true,
+          animation: { duration: 500 },
+          hoverMode: "index",
+          stacked: false,
+          title: {
+            display: true,
+            text: "Dados capturados - Catracas Leste",
+          },
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                display: true,
+                position: "left",
+                id: "y-chave",
+                ticks: {
+                  beginAtZero: true,
+                  max: 1,
+                  min: 0,
+                },
+
+                gridLines: {
+                  drawOnChartArea: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      var ctxOeste = linhaOeste.getContext("2d");
+      window.grafico_linha = Chart.Line(ctxOeste, {
+        data: dadosOeste,
+        options: {
+          responsive: true,
+          animation: { duration: 500 },
+          hoverMode: "index",
+          stacked: false,
+          title: {
+            display: true,
+            text: "Dados capturados - Catracas Oeste",
+          },
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                display: true,
+                position: "left",
+                id: "y-chave",
+                ticks: {
+                  beginAtZero: true,
+                  max: 1,
+                  min: 0,
+                },
+
+                gridLines: {
+                  drawOnChartArea: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      setTimeout(() => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste), 2000);
     }
-    function atualizarGrafico(idArduino, dados) {
+    function atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste) {
       fetch(`/medidas/tempo-real/${idArduino}`, { cache: "no-store" })
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (novoRegistro) {
               console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-              console.log(`Dados atuais do gráfico: ${dados}`);
+              console.log(`Dados atuais do gráfico: ${dadosNorte}`);
+              console.log(`Dados Oeste: ${dadosOeste}`)
 
               // tirando e colocando valores no gráfico
-              dados.labels.shift(); // apagar o primeiro
-              dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dadosNorte.labels.shift(); // apagar o primeiro
+              dadosNorte.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dadosSul.labels.shift(); // apagar o primeiro
+              dadosSul.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dadosLeste.labels.shift(); // apagar o primeiro
+              dadosLeste.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dadosOeste.labels.shift(); // apagar o primeiro
+              dadosOeste.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-              dados.datasets[0].data.shift(); // apagar o primeiro de umidade
-              dados.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
+              dadosNorte.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dadosNorte.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
+              dadosSul.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dadosSul.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
+              dadosLeste.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dadosLeste.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
+              dadosOeste.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dadosOeste.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
 
               // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
               // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
@@ -204,7 +384,7 @@
 
               // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
               proximaAtualizacao = setTimeout(
-                () => atualizarGrafico(idArduino, dados),
+                () => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste),
                 2000
               );
             });
@@ -212,7 +392,7 @@
             console.error("Nenhum dado encontrado ou erro na API");
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(
-              () => atualizarGrafico(idArduino, dados),
+              () => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste),
               2000
             );
           }
