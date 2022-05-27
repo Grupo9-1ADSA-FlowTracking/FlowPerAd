@@ -27,6 +27,23 @@ function buscarUltimasMedidas(idArduino, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
+// function buscarUltimasMedidasBarra(idArduino) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `COLOCAR O SELECT PUXANDO OS DADOS AGREGADOS - SELECT COUNT + GROUP BY MOMENTO_GRAFICO - PESQUISA COMO CONVERTER EM HORA - TESTAR: SELECT DATEPART(HOUR, GETDATE());`;
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `COLOCAR O SELECT PUXANDO OS DADOS AGREGADOS - SELECT COUNT + GROUP BY MOMENTO_GRAFICO - PESQUISA COMO CONVERTER EM HORA - TESTAR: SELECT DATEPART(HOUR, GETDATE());`;`;
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
 function buscarMedidasEmTempoReal(idArduino) {
 
     instrucaoSql = ''
