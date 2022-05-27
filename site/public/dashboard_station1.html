@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowTracking - Dashboard</title>
-    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+    ></script>
   </head>
 
   <body class="dashboard_viewport">
@@ -15,18 +18,18 @@
     <div class="dashboard_menu">
       <div class="menu_container">
         <div class="dashboard_logo_box">
-          <img class="dashboard_logo" src="../public/imagens/logos/logo3.png" />
+          <img class="dashboard_logo" src="imagens/logos/logo3.png" />
         </div>
         <div class="menu_buttons">
-          <button class="button_estacao">Consolação</button>
+          <h1>Estação exemplo</h1>
         </div>
         <div class="menu_logout">
           <a class="menu_perfil" href="">
-            <img class="logout_pic" src="../public/imagens/all/perfil.png" />
+            <img class="logout_pic" src="imagens/all/perfil.png" />
             <h5 id="b_usuario">Undefined</h5>
           </a>
           <a href="" class="div_sair">
-            <img class="sair_pic" src="../public/imagens/all/logout.png" />
+            <img class="sair_pic" src="imagens/all/logout.png" />
             <h5>Sair</h5>
           </a>
         </div>
@@ -35,55 +38,39 @@
     <div class="dashboard_display">
       <div class="dashboard_container1">
         <div class="container_quartis">
-          <div class="quartil quartilMin">
-            <h4>Péssimo Fluxo</h4>
-            <h3>-1000 P/H</h3>
-          </div>
-          <div class="quartil quartil1">
-            <h4>Pouco Fluxo</h4>
-            <h3>2000 P/H</h3>
-          </div>
-          <div class="quartil quartilMed">
-            <h4>Fluxo Médio</h4>
-            <h3>3000 P/H</h3>
-          </div>
-          <div class="quartil quartil3">
-            <h4>Bom Fluxo</h4>
-            <h3>4000 P/H</h3>
-          </div>
-          <div class="quartil quartilMax">
-            <h4>Ótimo Fluxo</h4>
-            <h3>5000 P/H</h3>
+          <div class="container1">
+            <div class="quartil quartilMin">
+              <h4>Péssimo Fluxo</h4>
+              <h3>-1000 P/H</h3>
+            </div>
+            <div class="quartil quartil1">
+              <h4>Pouco Fluxo</h4>
+              <h3>2000 P/H</h3>
+            </div>
+            <div class="quartil quartilMed">
+              <h4>Fluxo Médio</h4>
+              <h3>3000 P/H</h3>
+            </div>
+            <div class="quartil quartil3">
+              <h4>Bom Fluxo</h4>
+              <h3>4000 P/H</h3>
+            </div>
+            <div class="quartil quartilMax">
+              <h4>Ótimo Fluxo</h4>
+              <h3>5000 P/H</h3>
+            </div>
           </div>
         </div>
-
         <div class="corpoGraf">
-          <div class="conjunto1">
-            <div class="caixa">
-              <div class="grafLinha">
-                <canvas id="linhaNorte"></canvas>
-              </div>
-              <div class="grafLinha">
-                <canvas id="linhaSul"></canvas>
-              </div>
-            </div>
-            <div class="caixa2">
-              <div class="grafLinha">
-                <canvas id="linhaLeste"></canvas>
-              </div>
-              <div class="grafLinha">
-                <canvas id="linhaOeste"></canvas>
-              </div>
-            </div>
+          <div class="botoes">
+            <button onclick="obterDadosGrafico(1)">Catraca norte</button>
+            <button onclick="obterDadosGrafico(2)">Catraca sul</button>
+            <button onclick="obterDadosGrafico(3)">Catraca leste</button>
+            <button onclick="obterDadosGrafico(4)">Catraca oeste</button>
           </div>
-        </div>
-      </div>
-      <div class="dashboard_container2">
-        <div class="grafBarra">
-          <canvas id="barra"></canvas>
-        </div>
-        <div class="grafCalor">
-          <canvas id="calor"></canvas>
+          <div class="graflinha">
+            <canvas id="canvas_grafico"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -93,14 +80,24 @@
     let proximaAtualizacao;
 
     window.onload = obterDadosGrafico(1);
-    window.onload = obterDadosGrafico(2);
-    window.onload = obterDadosGrafico(3);
-    window.onload = obterDadosGrafico(4);
-
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    
+
+    verificar_autenticacao();
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(idArduino) {
+
       if (proximaAtualizacao != undefined) {
         clearTimeout(proximaAtualizacao);
       }
@@ -125,95 +122,37 @@
         });
     }
 
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGrafico(resposta, idArduino) {
       console.log("iniciando plotagem do gráfico...");
-      console.log(resposta)
 
-      var dadosNorte = {
+      var dados = {
         labels: [],
         datasets: [
           {
-            yAxisID: "y-chave",
-            label: "Registros",
-            borderColor: "#32B9CD",
-            backgroundColor: "#32b9cd8f",
+            yAxisID: "y-registro",
+            label: "Registro",
+            borderColor: "#00a46a",
+            backgroundColor: "#00c982",
             fill: true,
             data: [],
           },
         ],
       };
-
-      var dadosSul = {
-        labels: [],
-        datasets: [
-          {
-            yAxisID: "y-chave",
-            label: "Registros",
-            borderColor: "#32B9CD",
-            backgroundColor: "#32b9cd8f",
-            fill: true,
-            data: [],
-          },
-        ],
-      };
-
-      var dadosLeste = {
-        labels: [],
-        datasets: [
-          {
-            yAxisID: "y-chave",
-            label: "Registros",
-            borderColor: "#32B9CD",
-            backgroundColor: "#32b9cd8f",
-            fill: true,
-            data: [],
-          },
-        ],
-      };
-
-      var dadosOeste = {
-        labels: [],
-        datasets: [
-          {
-            yAxisID: "y-chave",
-            label: "Registros",
-            borderColor: "#32B9CD",
-            backgroundColor: "#32b9cd8f",
-            fill: true,
-            data: [],
-          },
-        ],
-      };
-      
 
       for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
-        dadosNorte.labels.push(registro.momento_grafico);
-        dadosSul.labels.push(registro.momento_grafico);
-        dadosLeste.labels.push(registro.momento_grafico);
-        dadosOeste.labels.push(registro.momento_grafico);
-        dadosNorte.datasets[0].data.push(registro.chave);
-        dadosSul.datasets[0].data.push(registro.chave);
-        dadosLeste.datasets[0].data.push(registro.chave);
-        dadosOeste.datasets[0].data.push(registro.chave);
-        console.log(registro.registro)
+        dados.labels.push(registro.momento_grafico);
+        dados.datasets[0].data.push(registro.registro);
       }
 
-      console.log("Dados da norte")
-      console.log(dadosNorte.datasets[0].data);
-      console.log("Dados da sul")
-      console.log(dadosSul.datasets[0].data);
-      console.log("Dados da leste")
-      console.log(dadosLeste.datasets[0].data);
-      console.log("Dados da oeste")
-      console.log(dadosOeste.datasets[0].data);
+      console.log(JSON.stringify(dados));
 
-
-      console.log(JSON.stringify(dadosNorte));
-
-      var ctxNorte = linhaNorte.getContext("2d");
-      window.grafico_linha = Chart.Line(ctxNorte, {
-        data: dadosNorte,
+      var ctx = canvas_grafico.getContext("2d");
+      window.grafico_linha = Chart.Line(ctx, {
+        data: dados,
         options: {
           responsive: true,
           animation: { duration: 500 },
@@ -221,7 +160,7 @@
           stacked: false,
           title: {
             display: true,
-            text: "Dados capturados - Catracas norte",
+            text: "Dados capturados ao vivo",
           },
           scales: {
             yAxes: [
@@ -229,15 +168,11 @@
                 type: "linear",
                 display: true,
                 position: "left",
-                id: "y-chave",
+                id: "y-registro",
                 ticks: {
                   beginAtZero: true,
                   max: 1,
                   min: 0,
-                },
-
-                gridLines: {
-                  drawOnChartArea: true,
                 },
               },
             ],
@@ -245,146 +180,37 @@
         },
       });
 
-      var ctxSul = linhaSul.getContext("2d");
-      window.grafico_linha = Chart.Line(ctxSul, {
-        data: dadosSul,
-        options: {
-          responsive: true,
-          animation: { duration: 500 },
-          hoverMode: "index",
-          stacked: false,
-          title: {
-            display: true,
-            text: "Dados capturados - Catracas Sul",
-          },
-          scales: {
-            yAxes: [
-              {
-                type: "linear",
-                display: true,
-                position: "left",
-                id: "y-chave",
-                ticks: {
-                  beginAtZero: true,
-                  max: 1,
-                  min: 0,
-                },
-
-                gridLines: {
-                  drawOnChartArea: true,
-                },
-              },
-            ],
-          },
-        },
-      });
-
-      var ctxLeste = linhaLeste.getContext("2d");
-      window.grafico_linha = Chart.Line(ctxLeste, {
-        data: dadosLeste,
-        options: {
-          responsive: true,
-          animation: { duration: 500 },
-          hoverMode: "index",
-          stacked: false,
-          title: {
-            display: true,
-            text: "Dados capturados - Catracas Leste",
-          },
-          scales: {
-            yAxes: [
-              {
-                type: "linear",
-                display: true,
-                position: "left",
-                id: "y-chave",
-                ticks: {
-                  beginAtZero: true,
-                  max: 1,
-                  min: 0,
-                },
-
-                gridLines: {
-                  drawOnChartArea: true,
-                },
-              },
-            ],
-          },
-        },
-      });
-
-      var ctxOeste = linhaOeste.getContext("2d");
-      window.grafico_linha = Chart.Line(ctxOeste, {
-        data: dadosOeste,
-        options: {
-          responsive: true,
-          animation: { duration: 500 },
-          hoverMode: "index",
-          stacked: false,
-          title: {
-            display: true,
-            text: "Dados capturados - Catracas Oeste",
-          },
-          scales: {
-            yAxes: [
-              {
-                type: "linear",
-                display: true,
-                position: "left",
-                id: "y-chave",
-                ticks: {
-                  beginAtZero: true,
-                  max: 1,
-                  min: 0,
-                },
-
-                gridLines: {
-                  drawOnChartArea: true,
-                },
-              },
-            ],
-          },
-        },
-      });
-
-      setTimeout(() => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste), 2000);
+      setTimeout(() => atualizarGrafico(idArduino, dados), 2000);
     }
-    function atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste) {
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas,
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function atualizarGrafico(idArduino, dados) {
       fetch(`/medidas/tempo-real/${idArduino}`, { cache: "no-store" })
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (novoRegistro) {
               console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-              console.log(`Dados atuais do gráfico: ${dadosNorte}`);
-              console.log(`Dados Oeste: ${dadosOeste}`)
+              console.log(`Dados atuais do gráfico: ${dados}`);
 
               // tirando e colocando valores no gráfico
-              dadosNorte.labels.shift(); // apagar o primeiro
-              dadosNorte.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-              dadosSul.labels.shift(); // apagar o primeiro
-              dadosSul.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-              dadosLeste.labels.shift(); // apagar o primeiro
-              dadosLeste.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-              dadosOeste.labels.shift(); // apagar o primeiro
-              dadosOeste.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-              dadosNorte.datasets[0].data.shift(); // apagar o primeiro de umidade
-              dadosNorte.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
-              dadosSul.datasets[0].data.shift(); // apagar o primeiro de umidade
-              dadosSul.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
-              dadosLeste.datasets[0].data.shift(); // apagar o primeiro de umidade
-              dadosLeste.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
-              dadosOeste.datasets[0].data.shift(); // apagar o primeiro de umidade
-              dadosOeste.datasets[0].data.push(novoRegistro[0].chave); // incluir uma nova medida de umidade
+              dados.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dados.datasets[0].data.push(novoRegistro[0].registro); // incluir uma nova medida de umidade
 
-              // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+              // dados.datasets[1].data.shift(); // apagar o primeiro de temperatura
               // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
               window.grafico_linha.update();
 
               // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
               proximaAtualizacao = setTimeout(
-                () => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste),
+                () => atualizarGrafico(idArduino, dados),
                 2000
               );
             });
@@ -392,7 +218,7 @@
             console.error("Nenhum dado encontrado ou erro na API");
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(
-              () => atualizarGrafico(idArduino, dadosNorte, dadosSul, dadosLeste, dadosOeste),
+              () => atualizarGrafico(idArduino, dados),
               2000
             );
           }
