@@ -11,6 +11,13 @@
       type="text/javascript"
       src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
     ></script>
+    <script>
+      window.fwSettings={
+      'widget_id':73000003229
+      };
+      !function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/73000003229.js' async defer></script>
   </head>
 
   <body class="dashboard_viewport">
@@ -21,14 +28,14 @@
           <img class="dashboard_logo" src="imagens/logos/logo3.png" />
         </div>
         <div class="menu_buttons">
-          <h1>Estação exemplo</h1>
+          <h1>Chácara Katiau</h1>
         </div>
         <div class="menu_logout">
           <a class="menu_perfil" href="">
             <img class="logout_pic" src="imagens/all/perfil.png" />
             <h5 id="b_usuario">Undefined</h5>
           </a>
-          <a href="" class="div_sair">
+          <a href="login.html" class="div_sair">
             <img class="sair_pic" src="imagens/all/logout.png" />
             <h5>Sair</h5>
           </a>
@@ -41,7 +48,7 @@
           <div class="container1">
             <div class="quartil quartilMin">
               <h4>Péssimo Fluxo</h4>
-              <h3>-1000 P/H</h3>
+              <h3>&#60;1000 P/H</h3>
             </div>
             <div class="quartil quartil1">
               <h4>Pouco Fluxo</h4>
@@ -57,16 +64,16 @@
             </div>
             <div class="quartil quartilMax">
               <h4>Ótimo Fluxo</h4>
-              <h3>5000 P/H</h3>
+              <h3>&#62;5000 P/H</h3>
             </div>
           </div>
         </div>
         <div class="corpoGraf">
           <div class="botoes">
-            <button onclick="obterDadosGrafico(1)">Catraca norte</button>
-            <button onclick="obterDadosGrafico(2)">Catraca sul</button>
-            <button onclick="obterDadosGrafico(3)">Catraca leste</button>
-            <button onclick="obterDadosGrafico(4)">Catraca oeste</button>
+            <button onclick="obterDadosGrafico(1); obterDadosGraficoBarra(1);">Catraca norte</button>
+            <button onclick="obterDadosGrafico(2); obterDadosGraficoBarra(2);">Catraca sul</button>
+            <button onclick="obterDadosGrafico(3); obterDadosGraficoBarra(3);">Catraca leste</button>
+            <button onclick="obterDadosGrafico(4); obterDadosGraficoBarra(4);">Catraca oeste</button>
           </div>
           <div class="graficos">
             <div class="graflinha">
@@ -129,31 +136,31 @@
     }
 
 // Obtendo os dados do grafico de barra
-//function obterDadosGraficoBarra(idArduino) {
+function obterDadosGraficoBarra(idArduino) {
 
-// if (proximaAtualizacao != undefined) {
-//   clearTimeout(proximaAtualizacao);
-// }
+if (proximaAtualizacao != undefined) {
+  clearTimeout(proximaAtualizacao);
+}
 
-// fetch(`/medidas/ultimas-barra/${idArduino}`, { cache: "no-store" })
-//   .then(function (response) {
-//     if (response.ok) {
-//       response.json().then(function (resposta) {
-//         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-//         resposta.reverse();
+fetch(`/medidas/ultimas-barra/${idArduino}`, { cache: "no-store" })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
 
-//         plotarGrafico(resposta, idArduino);
-//       });
-//     } else {
-//       console.error("Nenhum dado encontrado ou erro na API");
-//     }
-//   })
-//   .catch(function (error) {
-//     console.error(
-//       `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-//     );
-//   });
-// }
+        plotarGraficoBarra(resposta, idArduino);
+      });
+    } else {
+      console.error("Nenhum dado encontrado ou erro na API");
+    }
+  })
+  .catch(function (error) {
+    console.error(
+      `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+    );
+  });
+}
 
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
@@ -216,63 +223,63 @@
       setTimeout(() => atualizarGrafico(idArduino, dados), 2000);
     }
 
-    // function plotarGraficoBarra(resposta, idArduino) {
-    //   console.log("iniciando plotagem do gráfico...");
+    function plotarGraficoBarra(resposta, idArduino) {
+      console.log("iniciando plotagem do gráfico...");
 
-    //   var dados = {
-    //     labels: [],
-    //     datasets: [
-    //       {
-    //         yAxisID: "y-registro",
-    //         label: "Registro",
-    //         borderColor: "#00a46a",
-    //         backgroundColor: "#00c982",
-    //         fill: true,
-    //         data: [],
-    //       },
-    //     ],
-    //   };
+      var dados = {
+        labels: [],
+        datasets: [
+          {
+            yAxisID: "y-registro",
+            label: "Registros",
+            borderColor: "#00a46a",
+            backgroundColor: "#00c982",
+            fill: true,
+            data: [],
+          },
+        ],
+      };
 
-    //   for (i = 0; i < resposta.length; i++) {
-    //     var registro = resposta[i];
-    //     dados.labels.push(registro.momento_grafico);
-    //     dados.datasets[0].data.push(registro.registro);
-    //   }
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.momento_grafico);
+        dados.datasets[0].data.push(registro.chave);
+      }
 
-    //   console.log(JSON.stringify(dados));
+      console.log(JSON.stringify(dados));
 
-    //   var ctx = canvas_grafico_barra.getContext("2d");
-    //   window.grafico_barra = Chart.Bar(ctx, {
-    //     data: dados,
-    //     options: {
-    //       responsive: true,
-    //       animation: { duration: 500 },
-    //       hoverMode: "index",
-    //       stacked: false,
-    //       title: {
-    //         display: true,
-    //         text: "Dados capturados ao vivo",
-    //       },
-    //       scales: {
-    //         yAxes: [
-    //           {
-    //             type: "linear",
-    //             display: true,
-    //             position: "left",
-    //             id: "y-registro",
-    //             ticks: {
-    //               beginAtZero: true,
-    //               max: 1,
-    //               min: 0,
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     },
-    //   });
+      var ctx = canvas_grafico_barra.getContext("2d");
+      window.grafico_barra = Chart.Bar(ctx, {
+        data: dados,
+        options: {
+          responsive: true,
+          animation: { duration: 500 },
+          // hoverMode: "index",
+          stacked: false,
+          title: {
+            display: true,
+            text: "Dados mensais da catraca",
+          },
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                display: true,
+                position: "left",
+                id: "y-registro",
+                ticks: {
+                  beginAtZero: true,
+                  max: 1000,
+                  min: 0,
+                },
+              },
+            ],
+          },
+        },
+      });
 
-    //   setTimeout(() => obterDadosGraficoBarra(idArduino), 60000);
-    // }
+      setTimeout(() => obterDadosGraficoBarra(idArduino), 60000);
+    }
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
     // buscando a última medida inserida em tabela contendo as capturas,
