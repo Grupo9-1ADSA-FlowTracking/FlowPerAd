@@ -2,7 +2,7 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
 
-    const limite_linhas = 7;
+    const limite_linhas = 10;
 
     var idArduino = req.params.idArduino;
 
@@ -64,5 +64,4 @@ module.exports = {
     buscarUltimasMedidas,
     buscarUltimasMedidasBarra,
     buscarMedidasEmTempoReal
-
 }
