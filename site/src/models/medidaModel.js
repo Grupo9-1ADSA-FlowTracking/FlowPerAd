@@ -5,7 +5,7 @@ function buscarUltimasMedidas(idArduino) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select chave as registro, momento as momento_grafico
+        instrucaoSql = `select top 10 chave as registro, CONVERT(VARCHAR(30), momento, 108) as momento_grafico
         from Registro
         where fkArduino = ${idArduino}
         order by idRegistro desc;`;
@@ -13,7 +13,7 @@ function buscarUltimasMedidas(idArduino) {
         instrucaoSql = `select chave as registro, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
         from Registro
         where fkArduino = ${idArduino}
-        order by idRegistro desc limit 20;`;
+        order by idRegistro desc limit 10;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -24,11 +24,13 @@ function buscarUltimasMedidas(idArduino) {
 }
 
 function buscarUltimasMedidasBarra(idArduino) {
-
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `COLOCAR O SELECT PUXANDO OS DADOS AGREGADOS - SELECT COUNT + GROUP BY MOMENTO_GRAFICO - PESQUISA COMO CONVERTER EM HORA - TESTAR: SELECT DATEPART(HOUR, GETDATE());`;
+        instrucaoSql = `SELECT DATENAME(month, momento) as 'momento_grafico', sum(chave) as 'chave' from [dbo].[Registro] 
+        where fkArduino = ${idArduino}
+        group by DATENAME(month, momento) order by DATENAME(month,momento);
+        `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT MONTHNAME(momento) as momento_grafico, sum(chave) as chave
         FROM Registro where fkArduino = ${idArduino}
@@ -47,19 +49,15 @@ function buscarMedidasEmTempoReal(idArduino) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idArduino} 
-                    order by id desc`;
+        instrucaoSql = `select top 1 chave as registro, CONVERT(VARCHAR(30), momento, 108) as momento_grafico
+        from [dbo].[Registro] where fkArduino = ${idArduino}
+        order by idRegistro desc;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select chave as registro, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
         from Registro
         where fkArduino = ${idArduino}
-        order by idRegistro desc limit 10`;
+        order by idRegistro desc limit 1`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
