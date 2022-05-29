@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../public/css/estilo.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowTracking | Leilão</title>
+</head>
+
+<body id="body_leilao" class="dashboard_viewport">
+    <div id="alert_leilao" class="alert">
+        <img src="../public/imagens/logos/logo1.png">
+        <div class="alert_container">
+            <span id="alert_mensagem" class="alert_mensagem">
+                A Empresa EletroMidia deu pagou 20% a mais do preço inicial e ganhou o leilão !<br>
+                <span>Clique em "Okay"que você será redirecionado ao Dashboard</span>
+            </span>
+        </div>
+        <a href="dashboard_station1.html">
+            Okay
+        </a>
+    </div>
+    <div class="dashboard_menu">
+        <div class="menu_container">
+            <div class="dashboard_logo_box">
+                <img class="dashboard_logo" src="imagens/logos/logo3.png" />
+            </div>
+            <div class="menu_buttons">
+                <h1>Chácara Katiau</h1>
+            </div>
+            <div class="menu_logout">
+                <a class="menu_perfil" href="">
+                    <img class="logout_pic" src="imagens/all/perfil.png" />
+                    <h5 id="b_usuario">Undefined</h5>
+                </a>
+                <a href="login.html" class="div_sair">
+                    <img class="sair_pic" src="imagens/all/logout.png" />
+                    <h5>Sair</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="leilao_container">
+        <div class="leilao_box">
+            <div class="leilao_mensagem">
+                <h2>Leilão Aberto</h2>
+                <p>O Fluxo do Metrô está alto e ótimo para aumentar o preço da locação dos anúncios.<br>Faça um leilão
+                    para
+                    que um anúncio da empresa que cobrir o lance apareça em suas telas !</p>
+            </div>
+            <div class="form_inputs">
+                <b>Preço Inicial :</b>
+                <input id="input_leilao" placeholder="R$XXXX,XX">
+            </div>
+            <span id="leilao_mensagem">
+            </span>
+            <button onclick="enviar()" class="leilao_button">
+                Enviar Preço Inicial
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function enviar() {
+        leilao_mensagem.style.fontWeight = `1000`
+        var preço = Number(input_leilao.value)
+        if (preço == `` || preço < 1000) {
+            leilao_mensagem.innerHTML = `Preço Inválido !`
+            leilao_mensagem.style.color = `red`
+        }
+        else {
+            leilao_mensagem.innerHTML = `Preço Enviado. Lances em andamento...`
+            setTimeout(enviarAlert, 10000)
+            leilao_mensagem.style.color = `#009e67`
+        }
+    }
+    function enviarAlert() {
+        alert_leilao.style.zIndex = `0`
+    }
+</script>
