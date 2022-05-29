@@ -5,7 +5,7 @@ function buscarUltimasMedidas(idArduino) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 10 chave as registro, CONVERT(VARCHAR(30), momento, 108) as momento_grafico
+        instrucaoSql = `select top 15 chave as registro, CONVERT(VARCHAR(30), momento, 108) as momento_grafico
         from Registro
         where fkArduino = ${idArduino}
         order by idRegistro desc;`;
@@ -13,7 +13,7 @@ function buscarUltimasMedidas(idArduino) {
         instrucaoSql = `select chave as registro, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
         from Registro
         where fkArduino = ${idArduino}
-        order by idRegistro desc limit 10;`;
+        order by idRegistro desc limit 15;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -29,7 +29,7 @@ function buscarUltimasMedidasBarra(idArduino) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT DATENAME(month, momento) as 'momento_grafico', sum(chave) as 'chave' from [dbo].[Registro] 
         where fkArduino = ${idArduino}
-        group by DATENAME(month, momento) order by DATENAME(month,momento);
+        group by DATENAME(month, momento), MONTH(momento) order by month(momento);
         `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT MONTHNAME(momento) as momento_grafico, sum(chave) as chave
