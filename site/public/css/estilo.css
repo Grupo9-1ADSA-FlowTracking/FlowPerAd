@@ -1046,6 +1046,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-decoration: none;
 }
 
 .logout_pic {
@@ -1055,6 +1056,7 @@ input::-webkit-inner-spin-button {
 #b_usuario {
     color: white;
 }
+
 
 .div_sair{
     display: flex;
@@ -1090,7 +1092,7 @@ input::-webkit-inner-spin-button {
 }
 
 .quartil {
-    color: #ffffff;
+    color: black;
     height: 60px;
     width: 120px;
     display: flex;
@@ -1098,10 +1100,12 @@ input::-webkit-inner-spin-button {
     border-radius: 10px;
     align-items: center;
     justify-content: center;
+    padding: 5px;
+    border: 1px solid black;
 }
 
 .quartil h4 {
-    color: white;
+    color: black;
     font-size: 15px;
     margin: 0;
     margin-bottom: 10px;
@@ -1113,23 +1117,23 @@ input::-webkit-inner-spin-button {
 }
 
 .quartilMin {
-    background-color: rgba(255, 0, 0, 0.800);
+    background-color: rgba(212, 93, 93, 0.8);
 }
 
 .quartil1 {
-    background-color: rgba(255, 68, 0, 0.800);
+    background-color: rgb(212, 158, 87);
 }
 
 .quartilMed {
-    background-color: rgba(255, 166, 0, 0.800)
+    background-color: rgb(251, 253, 141)
 }
 
 .quartil3 {
-    background-color: rgba(0, 255, 0, 0.800);
+    background-color: rgb(109, 204, 121);
 }
 
 .quartilMax {
-    background-color: rgb(0, 199, 129, 0.800);
+    background-color: rgb(122, 255, 151);
 }
 
 .corpoGraf {
