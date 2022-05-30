@@ -484,13 +484,14 @@ input::-webkit-inner-spin-button {
 .faleconosco {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     flex-direction: column;
     width: 100%;
-    height: 550px;
+    height: 650px;
     color: #00c982;
     background-color: #e4fff6;
     border-top: 2px solid #00c982;
-    padding-top: 60px;
+    padding-top: 20px;
 }
 
 .faleconosco .container {
@@ -831,7 +832,7 @@ input::-webkit-inner-spin-button {
 }
 
 .div_cadastro {
-    height: 700px;
+    height: 785px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -840,7 +841,7 @@ input::-webkit-inner-spin-button {
 .div_cadastro .container {
     margin-top: 5%;
     width: 80%;
-    height: 500px;
+    height: 560px;
     display: flex;
     flex-direction: row;
 }

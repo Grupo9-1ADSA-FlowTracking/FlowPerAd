@@ -2,20 +2,34 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../public/css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlowTracking | Leilão</title>
+    <script>
+        window.fwSettings = {
+          widget_id: 73000003229,
+        };
+        !(function () {
+          if ("function" != typeof window.FreshworksWidget) {
+            var n = function () {
+              n.q.push(arguments);
+            };
+            (n.q = []), (window.FreshworksWidget = n);
+          }
+        })();
+      </script>
+    <script type="text/javascript" src="https://widget.freshworks.com/widgets/73000003229.js" async defer></script>
 </head>
 
 <body id="body_leilao" class="dashboard_viewport">
     <div id="alert_leilao" class="alert">
-        <img src="../public/imagens/logos/logo1.png">
+        <img src="imagens/logos/logo1.png">
         <div class="alert_container">
             <span id="alert_mensagem" class="alert_mensagem">
-                A Empresa EletroMidia deu pagou 20% a mais do preço inicial e ganhou o leilão !<br>
-                <span>Clique em "Okay"que você será redirecionado ao Dashboard</span>
+                A empresa Heineken pagou 20% a mais do preço inicial, ganhou o leilão e seu anúncio será exibido pelos próximos 30 minutos!<br>
+                <span>Clique em "Okay" que você será redirecionado ao Dashboard.</span>
             </span>
         </div>
         <a href="dashboard_station1.html">
@@ -45,10 +59,9 @@
     <div class="leilao_container">
         <div class="leilao_box">
             <div class="leilao_mensagem">
-                <h2>Leilão Aberto</h2>
+                <h2>Leilão aberto</h2>
                 <p>O Fluxo do Metrô está alto e ótimo para aumentar o preço da locação dos anúncios.<br>Faça um leilão
-                    para
-                    que um anúncio da empresa que cobrir o lance apareça em suas telas !</p>
+                    para que um anúncio da empresa que cobrir o lance apareça em suas telas!</p>
             </div>
             <div class="form_inputs">
                 <b>Preço Inicial :</b>
@@ -66,6 +79,7 @@
 </html>
 <script>
     function enviar() {
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
         leilao_mensagem.style.fontWeight = `1000`
         var preço = Number(input_leilao.value)
         if (preço == `` || preço < 1000) {

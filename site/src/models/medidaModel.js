@@ -29,7 +29,7 @@ function buscarUltimasMedidasBarra(idArduino) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT DATENAME(month, momento) as 'momento_grafico', sum(chave) as 'chave' from [dbo].[Registro] 
         where fkArduino = ${idArduino}
-        group by DATENAME(month, momento), MONTH(momento) order by month(momento);
+        group by DATENAME(month, momento), MONTH(momento) order by month(momento) desc;
         `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT MONTHNAME(momento) as momento_grafico, sum(chave) as chave
