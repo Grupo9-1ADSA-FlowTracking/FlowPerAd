@@ -28,7 +28,7 @@
         <img src="imagens/logos/logo1.png">
         <div class="alert_container">
             <span id="alert_mensagem" class="alert_mensagem">
-                A empresa Heineken pagou 20% a mais do preço inicial, ganhou o leilão e seu anúncio será exibido pelos próximos 30 minutos!<br>
+                A empresa Heineken pagou 20% a mais do preço inicial, ganhou o leilão e seu anúncio será exibido pelos próximos <span id="tempo_leilao">X</span> minutos!<br>
                 <span>Clique em "Okay" que você será redirecionado ao Dashboard.</span>
             </span>
         </div>
@@ -60,17 +60,21 @@
         <div class="leilao_box">
             <div class="leilao_mensagem">
                 <h2>Leilão aberto</h2>
-                <p>O Fluxo do Metrô está alto e ótimo para aumentar o preço da locação dos anúncios.<br>Faça um leilão
+                <p>O Fluxo do Metrô está alto e ótimo para aumentar o preço da locação dos anúncios.<br>Inicie um leilão
                     para que um anúncio da empresa que cobrir o lance apareça em suas telas!</p>
             </div>
             <div class="form_inputs">
-                <b>Preço Inicial :</b>
-                <input id="input_leilao" placeholder="R$XXXX,XX">
+                <b>Lance mínimo:</b>
+                <input id="input_leilao" placeholder="R$ XXXX,XX">
+                <b>
+                    Tempo de anúncio (em minutos):
+                </b>
+                <input id="input_tempo_anuncio" placeholder="Ex: 30">
             </div>
             <span id="leilao_mensagem">
             </span>
             <button onclick="enviar()" class="leilao_button">
-                Enviar Preço Inicial
+                Abrir leilão
             </button>
         </div>
     </div>
@@ -83,7 +87,7 @@
         leilao_mensagem.style.fontWeight = `1000`
         var preço = Number(input_leilao.value)
         if (preço == `` || preço < 1000) {
-            leilao_mensagem.innerHTML = `Preço Inválido !`
+            leilao_mensagem.innerHTML = `Preço Inválido!`
             leilao_mensagem.style.color = `red`
         }
         else {
@@ -94,5 +98,6 @@
     }
     function enviarAlert() {
         alert_leilao.style.zIndex = `0`
+        tempo_leilao.innerHTML = Number(input_tempo_anuncio.value)
     }
 </script>
