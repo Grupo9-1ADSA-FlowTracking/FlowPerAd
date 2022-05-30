@@ -42,7 +42,7 @@
                 <img class="dashboard_logo" src="imagens/logos/logo3.png" />
             </div>
             <div class="menu_buttons">
-                <h1>Chácara Katiau</h1>
+                <h1>ESTAÇÃO</h1>
             </div>
             <div class="menu_logout">
                 <a class="menu_perfil" href="">
@@ -82,8 +82,8 @@
 
 </html>
 <script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     function enviar() {
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
         leilao_mensagem.style.fontWeight = `1000`
         var preço = Number(input_leilao.value)
         if (preço == `` || preço < 1000) {
