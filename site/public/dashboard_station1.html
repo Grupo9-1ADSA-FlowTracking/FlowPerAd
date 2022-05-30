@@ -29,20 +29,20 @@
 
   <!-- Alert -->
   <div id="alert_leilao1" class="alert">
-    <img src="../public/imagens/logos/logo1.png">
+    <img src="imagens/logos/logo1.png">
     <div class="alert_container">
       <span id="alert_mensagem0" class="alert_mensagem">
-        A estação está <b>BOMBANDO</b> !<br>Você pode optar por fazer leilão da locação dosseus anúnicos e ver qual
+        A estação está <b>BOMBANDO</b>!<br>Você pode optar por fazer leilão da locação dos seus anúnicos e ver qual
         empresa
         pagará mais para ter os anúncios em suas telas.
       </span>
     </div>
     <div class="alert_buttons">
       <button onclick="naoquero()" href="dashboard_station1.html">
-        Não Quero Leiloar
+        Não quero leiloar
       </button>
       <a href="leilao.html">
-        Quero Leiloar
+        Quero leiloar
       </a>
     </div>
   </div>
@@ -74,23 +74,23 @@
         <div class="container1">
           <div class="quartil quartilMin" id="quartilMin">
             <h4>Péssimo Fluxo</h4>
-            <h3>&#60;1000 P/H</h3>
+            <h3>&#60;1000 p/h</h3>
           </div>
           <div class="quartil quartil1" id="quartil1">
             <h4>Pouco Fluxo</h4>
-            <h3>2000 P/H</h3>
+            <h3>2000 p/h</h3>
           </div>
           <div class="quartil quartilMed" id="quartilMed">
             <h4>Fluxo Médio</h4>
-            <h3>3000 P/H</h3>
+            <h3>3000 p/h</h3>
           </div>
           <div class="quartil quartil3" id="quartil3">
             <h4>Bom Fluxo</h4>
-            <h3>4000 P/H</h3>
+            <h3>4000 p/h</h3>
           </div>
           <div class="quartil quartilMax" id="quartilMax">
             <h4>Ótimo Fluxo</h4>
-            <h3>&#62;5000 P/H</h3>
+            <h3>&#62;5000 p/h</h3>
           </div>
         </div>
       </div>
@@ -310,6 +310,7 @@
   }
 
   var total_pessoas = 0;
+  var aparecer = false
 
   // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
   // buscando a última medida inserida em tabela contendo as capturas,
@@ -356,39 +357,41 @@
 
             }
 
-            if (total_pessoas < 1000) {
+            
+
+            if (total_pessoas < 3) {
               zerar_quartis();
               document.getElementById("quartilMin").style.width = "150px";
               document.getElementById("quartilMin").style.height = "70px";
               document.getElementById("quartilMin").style.border =
                 "3px solid black";
-            } else if (total_pessoas <= 2000) {
+            } else if (total_pessoas < 6) {
               zerar_quartis();
               document.getElementById("quartil1").style.width = "150px";
               document.getElementById("quartil1").style.height = "70px";
               document.getElementById("quartil1").style.border =
                 "3px solid black";
-            } else if (total_pessoas <= 3000) {
+            } else if (total_pessoas < 9) {
               zerar_quartis();
               document.getElementById("quartilMed").style.width = "150px";
               document.getElementById("quartilMed").style.height = "70px";
               document.getElementById("quartilMed").style.border =
                 "3px solid black";
-            } else if (total_pessoas <= 4000) {
+            } else if (total_pessoas < 12) {
               zerar_quartis();
               document.getElementById("quartil3").style.width = "150px";
               document.getElementById("quartil3").style.height = "70px";
               document.getElementById("quartil3").style.border =
                 "3px solid black";
-            } else if (total_pessoas <= 5000) {
+            } else {
               zerar_quartis();
               document.getElementById("quartilMax").style.width = "150px";
               document.getElementById("quartilMax").style.height = "70px";
               document.getElementById("quartilMax").style.border =
                 "3px solid black";
-              setTimeout(aparecerAlert, 2000)
-            } else {
-              window.location()
+                if (aparecer == false){
+                  aparecerAlert()
+                }
             }
 
 
@@ -419,6 +422,7 @@
 
   function naoquero() {
     alert_leilao1.style.zIndex = "-1"
+    aparecer = true
   }
 
   function aparecerAlert() {
